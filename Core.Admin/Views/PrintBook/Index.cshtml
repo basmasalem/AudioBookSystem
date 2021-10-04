@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "طباعة الكتب";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active">طباعة الكتب</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+
+    <!-- Row start -->
+    <div class="row gutters">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+
+                <div class="card-body">
+                    <div class="card-form">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="icon-layers2"></i> &nbsp; إدارة طباعة الكتب
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row gutters">
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-t-20">
+
+                                    <div class="card-form">
+
+                                        <div class="card-body">
+                                            <div id="divListPrintBook" data-request-url="@Url.Action("ListPrintBook","PrintBook")">
+                                                @Html.Action("ListPrintBook", "PrintBook")
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->

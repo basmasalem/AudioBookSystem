@@ -1,0 +1,19 @@
+﻿
+
+@{
+  
+    ViewData["Title"] = _localizer.GetString("BookCategories");
+}
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml",new string[]{ "Category" })
+
+
+<div class="rs-services rs-services-style7 sec-spacer">
+    <div class="container" id="divListCategory">
+
+        @Html.Action("CategoryList", "Category")
+  
+    
+    </div>
+</div>
+

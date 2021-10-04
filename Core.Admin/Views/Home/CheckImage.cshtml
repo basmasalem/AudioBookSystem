@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "CheckImage";
+}
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+            <div class="card-form h-100">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="icon-local_play"></i>  المتطوعين:
+
+
+                        <a class="add-user" href="#"><i class="icon-upload"></i> تصدير</a>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <form asp-action="CheckImage" asp-controller="Home" method="post" enctype="multipart/form-data">
+                        <div class="row gutters">
+                            <div class="form-group col-md-12">
+                                <label class="label-name" style="margin-top:25px;">الصورة</label>
+                                @Html.Editor("img", "Image", new { htmlAttributes = new { @id = "ImageId" } })
+                            </div>
+                            <button type="submit" class="btn btn-info">Save</button>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+

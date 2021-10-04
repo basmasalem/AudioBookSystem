@@ -1,0 +1,349 @@
+﻿@model AudioModel
+
+@{
+    ViewData["Title"] = "AddAudio";
+}
+
+
+
+
+<div class="rs-breadcrumbs bg7 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="page-title">@_localizer["addaudio"] </h1>
+                    <ul>
+                        <li>@_localizer["shareyouraudio"]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="add_audio">
+    <form action="/Audio/AddAudio" method="post" id="frmAudio" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center upload-part">
+
+                    <div class="verticle2">
+                        @Html.Hidden("BookImage", null, new { @id = "hdfAttachments" })
+                        @Html.Hidden("AudioSrc", null, new { @id = "hdfRecordAttachments" })
+                        @Html.Hidden("UploadType", null, new { @id = "UploadType" })
+
+                        @*------------ImageUpload----------*@
+                        <input type="file"  id="filImage" onchange="uploadImage()" hidden>
+
+
+                        <div class="loader" id="loaderImg" style="display:none;">
+                            <div class="loader-wheel"></div>
+
+                        </div>
+                        <div class="item afte_upload">
+
+                            <div class="row">
+                                <div id="divImgUpload" class="col-lg-12 col-sm-12 " onclick="$('#filImage').click();">
+                                    <img src="~/assets/img/icon/upload_img.png">
+                                    <span class="file-input btn  btn-file">
+                                        @_localizer["uploadcoverphoto"]
+                                    </span>
+                                    <p>
+                                        @_localizer["uploadcoverwithextension"]
+                                        <br>
+                                        Jpeg,Jpg,Png
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12">
+                                    <div id="imageres">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="item " id="audioImagediv">
+                            <div onclick="$('#filImage').click();">
+
+                                <img src="~/assets/img/icon/upload_img.png">
+                                <span class="file-input btn  btn-file">
+
+                                    @_localizer["uploadcoverphoto"]
+                                </span>
+                                <p>
+                                    @_localizer["uploadcoverwithextension"]
+                                    <br>
+                                    Jpeg,Jpg,Png
+                                </p>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="item afte_upload" id="divAttachments" style="display:none;">
+
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="after_upload">
+                                        <h3>@_localizer["coverphoto"]</h3>
+                                        <p>
+                                            @_localizer["uploadcoverwithextension"]
+
+                                            Jpeg,Jpg,Png
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12" id="imageres">
+
+                                </div>
+                            </div>
+                        </div>*@
+                        <hr>
+
+
+
+
+
+
+                        @*--------------AudioFile------------*@
+
+                        <div class="item" id="audioSrcdiv">
+                            <div onclick="$('#fileAudio').click();">
+                                <img src="~/assets/img/icon/upload_file.png">
+                                <span class="file-input btn  btn-file">
+                                    @_localizer["uploadaudio"]
+                                </span>
+                                <p>
+                                    ogg,mp3,mpeg,wav,oga,m4a,swf max size
+                                    <br>
+                                    30MB
+                                </p>
+                            </div>
+                            <input type="file" id="fileAudio" hidden multiple onchange="uploadAudioAttach()">
+
+                            <div class="loader" id="loaderAudio" style="display:none;">
+                                <div class="loader-wheel"></div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="item" id="uploadAudiosrc" style="display:none;">
+                            <span class="file-input btn  btn-file">
+                                @_localizer["audiofile"]
+                            </span>
+                            <p>
+                                ogg,mp3,mpeg,wav,oga,m4a,swf max size
+                                <br>
+                                30MB
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-4">
+                                    <div class="user_delete2"><a href="javascript:void(0)" id="deleteaudiobtn"><img src="~/assets/img/icon/delete.png"></a></div>
+                                </div>
+                                <div class="col-lg-10 col-sm-8" id="audiosrc">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <hr>
+
+
+
+
+                        @*--------------Record------------*@
+
+                        @*disabledbutton*@
+                        <div class="item" id="audioRecordDiv" data-toggle="modal" data-target="#exampleModalRecord">
+                            <img src="~/assets/img/icon/upload_record.png">
+                            <a>
+                                <span class="file-input btn  btn-file">
+                                    @_localizer["recordaudio"]
+                                </span>
+                            </a>
+                            <p>
+                                @_localizer["recordaudioby"]
+
+
+                                <br>
+                                @_localizer["pressmice"]
+                            </p>
+                        </div>
+
+
+
+                        <div class="item" id="divRecord" style="display:none;">
+                            <span class="file-input btn  btn-file">
+                                @_localizer["audiofile"]
+
+                            </span>
+                            <p>
+                                ogg,mp3,mpeg,wav,oga,m4a,swf max size
+                                <br>
+                                30MB
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-4">
+                                    <div class="user_delete2"><a href="javascript:void(0)" id="deleteRecordanchor"><img src="~/assets/img/icon/delete.png"></a></div>
+                                </div>
+                                <div class="col-lg-10 col-sm-8" id="recordSrc">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center form_part">
+                        <div class="form_add">
+
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/head_phone.png"></span>
+                                    <select class="form-control" asp-for="PodcastId" asp-items="ViewBag.Podcasts">
+                                        <option value="" selected disabled hidden> @_localizer["choosepodcast"]</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/catgory.png"></span>
+                                    <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Categories">
+                                        <option value="" selected disabled hidden>@_localizer["choosecategory"]</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/grau-book.png"></span>
+                                    <select class="form-control" asp-for="AudioTypeId" asp-items="ViewBag.AudioTypes">
+                                        <option value="">@_localizer["chooseaudiotype"]</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/write.png"></span>
+                                    <input asp-for="BookNameAr" class="form-control" type="text" placeholder="@_localizer["booknamear"]">
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/write.png"></span>
+                                    <input asp-for="BookNameEn" class="form-control" type="text" placeholder="@_localizer["booknameen"] ">
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/icon_user.png"></span>
+                                    <input asp-for="AuthorNameAr" class="form-control" type="text" placeholder="@_localizer["authornamear"]">
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/icon_user.png"></span>
+                                    <input asp-for="AuthorNameEn" class="form-control" type="text" placeholder="@_localizer["authornameen"] ">
+                                </div>
+                            </div>
+
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                                    <textarea asp-for="DescriptionAr" class="form-control height-addsound"  rows="3" placeholder="@_localizer["desAr"]"></textarea>
+
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                                    <textarea asp-for="DescriptionEn" class="form-control height-addsound"  rows="3" placeholder="@_localizer["desEn"]"></textarea>
+
+                                </div>
+                            </div>
+
+                            <p class="share-title">@_localizer["shareaudiourl"]</p>
+
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/link-gray.png"></span>
+                                    <input asp-for="ArticleUrl" class="form-control" type="text" placeholder=" @_localizer["audiourl"]">
+                                </div>
+                            </div>
+                            <div class="item_form">
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/video-link.png"></span>
+                                    <input asp-for="VideoUrl" class="form-control" type="text" placeholder=" @_localizer["vediourl"]">
+                                </div>
+                            </div>
+                            <div class="add-file">
+                                <a class="btn btn-add" href="javascript:void(0)" id="btnSaveAudio"> @_localizer["addfile"]</a>
+                                @*<button class="btn btn-add" id="btnSaveAudio">@_localizer["addfile"]</button>*@
+                            </div>
+                        </div>
+                    </div>
+
+               
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<!--Record Modal -->
+<div class="modal fade" id="exampleModalRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog record modal-dialog-centered" role="document">
+        <div class="modal-content border">
+
+            <div class="modal-body">
+                <div class="button_record text-center">
+                    <div class="stop">
+                        <button href="javascript:void(0)" class="nostyle disabledbutton" id="stopButton"><img src="~/assets/img/icon/stop.png"></button>
+                    </div>
+                    <div class="record re example-1">
+                        <button href="javascript:void(0)" class="alink nostyle" id="recordButton"><img src="~/assets/img/icon/record4.png"></button>
+                    </div>
+                    <div class="delete_audio">
+                        <button href="javascript:void(0)" class="nostyle " id="pauseButton"><img src="~/assets/img/icon/pause.png"></button>
+                    </div>
+                    @*<h3 class="time-record">05:45</h3>*@
+                    <div id="recordingsList" class="popup-record"></div> @*popup-record*@
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/js/Views/Audio.js" asp-append-version="true"></script>
+<script src="~/js/Views/Attachment.js" asp-append-version="true"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="~/js/Record/app.js" asp-append-version="true"></script>
+

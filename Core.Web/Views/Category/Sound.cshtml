@@ -1,0 +1,37 @@
+﻿@model int
+@{
+    ViewData["Title"] = _localizer.GetString("Category Audios");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="rs-breadcrumbs bg7 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="page-title">@ViewBag.Name</h1>
+                    <ul>
+                        <li>
+                            <a class="active" asp-controller="Home"  asp-action="Index">@_localizer["Home"]</a>
+                        </li>
+                        <li>
+                            <a class="active" asp-controller="Category"  asp-action="Index">@_localizer["Book Categories"]</a>
+                        </li>
+                        <li>@ViewBag.Name</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Course Categories Start-->
+<div id="rs-events-2 sec-spacer " class=" sec-spacer pt-90 pb-100">
+    <div class="container" id="divListAudioCategories">
+       @Html.Action("ListSound", "Category", new { Id=Model})
+       
+    </div>
+
+
+
+</div>
+<!-- Course Categories End -->

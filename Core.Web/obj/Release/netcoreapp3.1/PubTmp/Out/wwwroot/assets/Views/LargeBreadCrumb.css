@@ -1,0 +1,33 @@
+﻿
+
+
+.bg7 {
+    background-image: url(/assets/img/banner/banner.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+}
+
+.rs-breadcrumbs.style2 .page-title {
+    margin: 11px 0 40px;
+    font-size: 36px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rs-breadcrumbs.style2 ul {
+    margin-bottom: 35px;
+}
+
+
+
+.bg11 {
+    background-image: url(/assets/img/banner/banner.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 220px 0 !important;
+}
+

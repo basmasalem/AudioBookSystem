@@ -1,0 +1,111 @@
+﻿@model AudioVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>  الكتاب بالعربى  </th>
+                <th>  الكتاب بالانجليزى  </th>
+                <th>المؤلف بالعربى </th>
+                <th>المؤلف بالانجليزى </th>
+                <th>التصنيف </th>
+                <th>نوع الملف الصوتى </th>
+                <th>الحالة </th>
+                <th> التقييمات</th>
+                <th> </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Audios)
+            {
+                <tr>
+
+                    <td>@indexer</td>
+                    <td>@item.BookNameAr</td>
+                    <td>@item.BookNameEn</td>
+                    <td>@item.AuthorNameAr</td>
+                    <td>@item.AuthorNameEn</td>
+                    <td>@item.Category.NameAr</td>
+                    <td>
+                        @item.AudioType.NameAr
+                    </td>
+                    @*<td><img src="@(!(string.IsNullOrEmpty(item.AudioType.Image))?"/Attachments/Images/"+item.AudioType.Image:"/images/audio/1.jpg")" class="circle image_audiotype img-avatar"></td>*@
+                    <td class="text-center">
+
+                        <a href="#" title="@(item.ApproveStatus?"تعطيل":"تفعيل")" class="@(item.ApproveStatus?"icon_circle_link":"icon_check_link")" id="btnAudioStatus_@item.AudioId" onclick="ConfirmChangeStatusAudio(@item.AudioId)" data-url="@Url.Action("ChangeStatus")">
+                            <i class="@(item.ApproveStatus?"icon-x-circle":"icon-check-circle")"></i>
+                        </a>
+
+                    </td>
+                    <td class="txt-center"><a href="@Url.Action("AudioRate","Audio",new { Id=item.AudioId})" title="التقييمات"><span class="icon-star2 eva"></span></a></td>
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("AddEdit","Audio",new { Id=item.AudioId})">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a class="btn feather-btn" href="@Url.Action("Details","Audio",new { Id=item.AudioId})" title="التفاصيل"><i class="icon-feather"></i></a>
+
+                            <a class="btn trash-btn" href="#" id="btnAudioDelete_@item.AudioId" onclick="ConfirmDeleteAudio(@item.AudioId)" data-url="@Url.Action("DeleteAudio")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.Audios, page => Url.Action("ListAudio", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListAudio" }))
+}
+else
+{
+    @Html.PagedListPager(Model.Audios, page => Url.Action("SearchAudio", new
+{
+    Model.SearchAudioVModel.AudioTypeId,
+    Model.SearchAudioVModel.AuthorName,
+    Model.SearchAudioVModel.BookName,
+    Model.SearchAudioVModel.CategoryId,
+    Model.SearchAudioVModel.Status,
+    page
+}),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListAudio" }))
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/AudioData.js" asp-append-version="true"></script>

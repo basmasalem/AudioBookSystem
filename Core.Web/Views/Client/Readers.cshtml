@@ -1,0 +1,17 @@
+﻿
+
+@{
+    ViewData["Title"] = _localizer.GetString("Reading advisors");
+}
+
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "readingmentors" })
+
+<!-- Course Categories Start-->
+<div id="rs-courses-style7" class="rs-courses-style7 sec-spacer">
+    <div class="container" id="divReadersList">
+
+        @Html.Action("ReaderList", "Client")
+    </div>
+</div>
+

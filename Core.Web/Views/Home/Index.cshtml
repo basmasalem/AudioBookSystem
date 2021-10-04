@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewData["Title"] = _localizer.GetString("Home");
+    bool IsLogin = ViewBag.IsLogin ?? true;
+}
+
+<div class="rs-banner-section">
+    <img class="banner" src="~/assets/img/banner/bg-banner.png" alt="">
+    <div class="banner-inner">
+        <div class="container">
+            <div class="banner-text">
+
+                <h1 class="banner-title">@_localizer["AudioKetabPlatform"]</h1>
+                <h4 class="content">@Html.Raw(ViewBag.AudioDesc)</h4>
+                <div class="btn-area pt-20">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/assets/img/icon/book.png"> @_localizer["BooksMenu"] <img src="~/assets/img/icon/arrow-white.png"></button>
+                            <div class="dropdown-menu" id="CategorySelect">
+                            </div>
+                        </div>
+                        <input type="search" id="searchText" class="form-control icon" placeholder=" @_localizer["searchFile"]" aria-label="Text input with dropdown button">
+                        <a class="search_input" onclick="SearchByName()" href="#">@_localizer["search"]</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Events Start -->
+<div id="rs-events" class="rs-events sec-spacer">
+    <div class="container">
+        <div class="sec-title mb-50 text-center">
+            <h2>@_localizer["Podcast"]</h2>
+            <p>@_localizer["podcastDesc"]</p>
+        </div>
+        @Html.Action("GetPodcastSection", "Home")
+    </div>
+</div>
+<!-- Events End -->
+<div id="rs-calltoaction" class="rs-calltoaction sec-spacer bg1">
+    <div class="container">
+        <div class="rs-cta-inner text-center">
+            <div class="sec-title2 text-center">
+                <h2>@_localizer["ShareBook"]</h2>
+                <p class="share-book">@_localizer["ShareBookDesc"]</p>
+            </div>
+            <a class="cta-button" href="javascript:void(0)" onclick="AddAudio('@User.Identity.IsAuthenticated')"><img src="~/assets/img/icon/add.png"> @_localizer["Share your book"]</a>
+     
+        </div>
+    </div>
+</div>
+<!-- Course Categories Start-->
+<div id="rs-courses-style7" class="rs-courses-style7 sec-spacer">
+    <div class="container">
+        <div class="sec-title2 mb-45 text-center">
+
+            <h2> @_localizer["Reading advisors"]</h2>
+            <p>@_localizer["ReadingAdvisorsDesc"]</p>
+        </div>
+        @Html.Action("GetClientSection", "Home")
+
+    </div>
+</div>
+<!-- Course Categories End -->
+<!-- Course Categories Start-->
+<div id="rs-events-2 sec-spacer" class="rs-events-2 sec-spacer pt-90 pb-100">
+    <div class="container">
+        <div class="sec-title2 mb-45 text-center">
+
+            <h2 class="txt-white">@_localizer["Latest audios"]</h2>
+            <p class="txt-white">@_localizer["Latest audios Desc"]</p>
+        </div>
+        @Html.Action("GetAudioSection", "Home")
+
+    </div>
+</div>
+<!-- Course Categories End -->
+
+<div class="rs-services rs-services-style7 sec-spacer">
+    <div class="container">
+        <div class="sec-title2 mb-45 text-center">
+
+            <h2> @_localizer["bookcategories"]</h2>
+            <p>@_localizer["searchaudiobybycategories"]</p>
+        </div>
+        <div class="row">
+            @Html.Action("GetCategorySection", "Home")
+
+        </div>
+    </div>
+</div>
+
+<div id="rs-calltoaction" class="rs-calltoaction sec-spacer bg2">
+    <div class="container">
+        <div class="rs-cta-inner text-center">
+            <div class="sec-title2 text-center">
+                <h2>@_localizer["PrintBook"]</h2>
+                <p class="share-book">@_localizer["PrintBookDesc"]</p>
+            </div>
+            <a class="print-button" asp-controller="PrintBook" asp-action="Index"><img src="~/assets/img/icon/add.png"> @_localizer["Share your book"]</a>
+          
+
+        </div>
+    </div>
+</div>
+
+<!-- Events Start -->
+<div id="rs-events" class="rs-events2 sec-spacer">
+    <div class="container">
+        <div class="sec-title2 mb-50 text-center">
+            <h2>@_localizer["Articles"]</h2>
+            <p>@_localizer["collectionofarticlespresentedbyAudioketab"]</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-autoplay-timeout="3000" data-smart-speed="1200" data-dots="true" data-nav="true" data-nav-speed="false" data-mobile-device="1" data-mobile-device-nav="true" data-mobile-device-dots="true" data-ipad-device="2" data-ipad-device-nav="true" data-ipad-device-dots="true" data-md-device="3" data-md-device-nav="true" data-md-device-dots="true">
+
+                    @Html.Action("GetArticleSection", "Home")
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Events End -->
+
+
+<div id="rs-calltoaction" class="rs-calltoaction sec-spacer bg3">
+    <div class="container">
+        <div class="rs-cta-inner m-image text-center">
+            <div class="sec-title2 text-center">
+                <h2>@_localizer["ReadyourBook"]</h2>
+                <p class="read-book">
+                    @_localizer["ReadyourBookDesc"]
+                </p>
+            </div>
+            <a href="#"><img class="app-store" src="~/assets/img/button/app-store.png"></a>
+            <a href="#"><img class="google-play" src="~/assets/img/button/google-play.png"></a>
+
+        </div>
+    </div>
+</div>
+
+<div id="rs-learning-objectives" class="rs-learning-objectives pt-100 pb-70">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="courses-item line">
+                    <img src="~/assets/img/icon/doc.png">
+                    <h4 class="courses-title"><a href="#">@_localizer["Read and summarize"]</a></h4>
+                    <p>
+                        @_localizer["Read and summarize Desc"]
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="courses-item line">
+                    <img src="~/assets/img/icon/voice.png">
+                    <h4 class="courses-title"><a href="#">@_localizer["Register and download"]</a></h4>
+                    <p>@_localizer["Register and download Desc"]</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="courses-item">
+                    <img src="~/assets/img/icon/mic.png">
+                    <h4 class="courses-title"><a href="#">@_localizer["listen and share"]</a></h4>
+                    <p>@_localizer["listen and share Desc"]</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script src="~/js/Views/Home.js" asp-append-version="true"></script>
+
+    <script>
+        if ('@IsLogin' == 'False') {
+            debugger;
+            $(".bd-example-modal-xl").modal();
+        }
+    </script>
+}

@@ -1,0 +1,54 @@
+﻿@model IPagedList<ClientPlayListViewModel>
+
+
+@if (Model.Count() != 0)
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-12 pr-0">
+                <div class="playlist_item text-center">
+
+                    <h2><a asp-controller="Client" asp-action="PlaylistAudio" asp-route-Id="@item.Key">@(ViewBag.langId==1?item.NameAr:item.NameEn)</a></h2>
+                    <p class="other-p">@(ViewBag.langId==1?item.DescAr:item.DescEn)</p>
+                    <span>@item.AudiosCount</span>
+                    <div class="div_icon_group">
+                        <audio style="display:none !important" id="AudioPlaylist_@item.Key" controls autoplay></audio>
+                        <div class="video" id="btnplayClientPalyList_@item.Key"><a href="#"  onclick="RunningPlaylist('@item.Key')"><img id="imgPlayList_@item.Key" src="~/assets/img/icon/v.png"></a></div>
+                        <div class="user_delete"><a href="#" data-toggle="modal" data-target="#confirmDeleteModalCenter" onclick="ConfirmRemovePlaylist('@item.Key', '@(ViewBag.langId==1?item.NameAr:item.NameEn)', true)"><img src="~/assets/img/icon/delete.png"></a></div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Home/_NoData.cshtml", "noplaylist")
+
+}
+@if (ViewBag.Pagination)
+{
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    @Html.PagedListPager(Model, page => Url.Action("GetPlaylist", new { page }),
+                          PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                          {
+                              ActiveLiElementClass = "page-item active",
+                              PageClasses = new[] { "page-link" },
+                              UlElementClasses = new[] { "pagination rounded success justify-content-center" },
+                              LiElementClasses = new[] { "page-item" }
+
+                          },
+                          new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divPlaylist" }))
+                </div>
+            </div>
+        </div>
+    </div>
+}

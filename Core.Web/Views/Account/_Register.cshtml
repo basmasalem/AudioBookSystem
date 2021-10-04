@@ -1,0 +1,105 @@
+﻿@model RegisterVM
+
+    <form action="/Account/Register" id="frmRegister">
+        <div class="modal-content login">
+
+            <div class="add_audio">
+                <div class="container popup">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center contact-info2">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center form_part">
+                            <div class="login-content ">
+                                <div class="login-meta">
+                                    <h3> @_localizer["register"]</h3>
+                                    <p> @_localizer["logintoenjoy"]</p>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12">
+                                        <div class="form-group">
+                                            <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                            <input asp-for="FirstName" class="form-control " placeholder="@_localizer["firstname"] " type="text">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12">
+                                        <div class="form-group">
+                                            <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                            <input asp-for="LastName" class="form-control " placeholder="@_localizer["lastname"] " type="text">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                    <input asp-for="FullName" class="form-control pass" placeholder="@_localizer["fullnameAR"] " type="text">
+
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                    <input asp-for="FullNameEn" class="form-control pass" placeholder="@_localizer["fulllnameEN"] " type="text">
+
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/mess-form.png"></span>
+                                    <input asp-for="Email" class="form-control pass" placeholder="@_localizer["email"] " type="email">
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/phone.png"></span>
+                                    <input asp-for="Phone" class="form-control pass" placeholder="@_localizer["phone"] " type="text">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="placeholder-img"><img src="~/assets/img/icon/loc2.png"></span>
+                                    <select class="form-control pass" asp-for="CityId" asp-items="ViewBag.Cities">
+                                        <option value="0">@_localizer["city"]</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="placeholder-img "><img src="~/assets/img/icon/key.png"></span>
+                                    <input asp-for="Password" class="form-control pass" placeholder="@_localizer["password"] " type="password">
+                                    <span toggle="#password-field" class=" field-icon toggle-password placeholder-img key"><img class=" pass-img field-icon toggle-password" src="~/assets/img/icon/eye_splash.png"></span>
+                                </div>
+                                <div class="form-group">
+                                    <span class="placeholder-img "><img src="~/assets/img/icon/key.png"></span>
+                                    <input asp-for="ConfirmPassword" class="form-control pass" placeholder="@_localizer["confirmpassword"] " type="password">
+
+                                    <span toggle="#password-field" class=" field-icon toggle-confirmpassword placeholder-img key"><img class=" pass-img2 field-icon toggle-confirmpassword" src="~/assets/img/icon/eye_splash.png"></span>
+                                </div>
+                                <label class="container-check ">
+                                    <a class="roles" asp-action="TermsAndCondition" asp-controller="Setting" target="_blank">
+                                        @_localizer["termsandconditions"]
+                                    </a>
+                                    <input type="checkbox" id="AgreeTerms">
+                                    <span class="checkmark" id="ck_terms"></span>
+                                </label>
+
+
+                                <div class="login-btn">
+                                    <div class="login">
+                                        <a class="btn btn-add" href="javascript:void(0)" id="btnRegister">@_localizer["send"]</a>
+                                    </div>
+                                    <div class="forget ">
+                                        <a  data-toggle="modal"class="hideRegister" data-target=".bd-example-modal-xl">  @_localizer["haveaccount"]؟</a>
+                                    </div>
+                                    <div class="create ">
+                                        <a data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-add hideRegister"> @_localizer["login"]</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>

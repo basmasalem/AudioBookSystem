@@ -1,0 +1,36 @@
+﻿@model PodcastViewModel
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+@if (Model != null)
+{
+<div class="event-item two">
+    <div class="event-img">
+        <a asp-controller="Podcast" asp-action="Details" asp-route-Id="@Model.Key">
+            <img src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+Model.Image)" alt="" />
+        </a>
+
+    </div>
+    <span class="sub_title">@(Model.Type==PodcastType.Public? _localizer.GetString("public") : _localizer.GetString("private"))</span>
+    <div class="events-details text-center sec-color">
+        <div class="event-date">
+            <a asp-controller="Podcast" asp-action="Details" asp-route-Id="@Model.Key">
+                <h4>@(int.Parse(_localizer.GetString("langId"))==1? Model.NameAr:Model.NameEn)</h4>
+            </a>
+        </div>
+     
+        <p>@(int.Parse( _localizer.GetString("langId")) == 1 ? Model.DescAr.Substring(0, 70) : Model.DescEn.Substring(0, 70) )</p> 
+        <div class="event-meta">
+            <div class="event-time">
+                <img src="~/assets/img/icon/users.png">
+                <span>@_localizer["listeners"]  @Model.ParticipantCount</span>
+            </div>
+            <div class="event-location">
+                <img src="~/assets/img/icon/record.png">
+                <span>@_localizer["Episodes"]   @Model.AudioCount</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+}

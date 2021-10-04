@@ -1,0 +1,86 @@
+﻿@model AudioViewModel
+
+    <div class="row gutters">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-layers"></i>اسم التصنيف</h5>
+                <h4>@Model.CategoryNameAr</h4>
+                <h4>@Model.CategoryNameEn</h4>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-book-open"></i> اسم الكتاب</h5>
+                <h4>@Model.BookNameAr</h4>
+                <h4>@Model.BookNameEn</h4>
+
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-user1"></i> اسم المؤلف</h5>
+                <h4>@Model.AuthorNameAr</h4>
+                <h4>@Model.AuthorNameEn</h4>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-image"></i> صورة الكتاب</h5>
+                <a href="#"><img class="book_cover" src="@(string.IsNullOrEmpty(Model.BookImage)?"/images/book.jpg":"/Attachments/Images/"+Model.BookImage)"></a>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-attachment1"></i>رابط الفيديو</h5>
+                <a href="@(string.IsNullOrEmpty(Model.VideoUrl)?"javascript:void(0)":Model.VideoUrl)" @(string.IsNullOrEmpty(Model.VideoUrl) ? string.Empty : "target='_blank'")>@Model.VideoUrl</a>
+
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card h-ticket">
+                <h5><i class="icon-attachment1"></i>رابط المقال</h5>
+                <a href="@(string.IsNullOrEmpty(Model.ArticleUrl)?"javascript:void(0)":Model.ArticleUrl)" @(string.IsNullOrEmpty(Model.ArticleUrl) ? string.Empty : "target='_blank'")>@Model.ArticleUrl</a>
+
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="ticket-status-card h-ticket ">
+                <h5><i class="icon-mic"></i> نوع الصوت</h5>
+                <img class="book_cover" src="@(string.IsNullOrEmpty(Model.AudioTypeImage)?"/images/book.jpg":"/Attachments/Images/"+Model.AudioTypeImage)">
+                <p class="txt-center type_audio">نوع الصوت المرفوع</p>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="ticket-status-card h-ticket customScroll9">
+                <h5><i class="icon-border_color"></i> التفاصيل</h5>
+                <p class="txt-right">@Html.Raw(Model.DescriptionAr)</p>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+            <div class="ticket-status-card h-ticket customScroll9">
+                <h5><i class="icon-border_color"></i> التفاصيل</h5>
+                <p class="txt-left">@Html.Raw(Model.DescriptionEn)</p>
+            </div>
+        </div>
+
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-20">
+            <div class="ticket-status-card h-ticket">
+                <h5 class="@(Model.UploadType==UploadType.Upload?"download_file_text":"record_file")"><i class="icon-share-alternitive"></i> تحميل ملف صوتي</h5>
+                <h5 class="@(Model.UploadType==UploadType.Record?"download_file_text":"record_file")"><i class="icon-mic"></i> تسجيل ملف صوتي</h5>
+                <div class="post-content">
+
+                    <audio class="audio_player" controls>
+                        <source src="~/Attachments/Audios/@Model.AudioSrc" type="audio/ogg">
+                    </audio>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+

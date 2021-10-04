@@ -1,0 +1,86 @@
+﻿@model CategoryVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم بالعربي</th>
+                <th>الاسم بالانجليزي </th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.NameAr
+                    </td>
+                    <td>@item.NameEn</td>
+
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("AddEdit","Category",new { Id=item.CategoryId})">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a class="btn trash-btn" href="#" id="btnCategoryDelete_@item.CategoryId" onclick="ConfirmDeleteCategory(@item.CategoryId)" data-url="@Url.Action("DeleteCategory")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.Categories, page => Url.Action("ListCategory", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListCategory" }))
+}
+else
+{
+    @Html.PagedListPager(Model.Categories, page => Url.Action("SearchCategory", new { Model.SearchCategoryVModel.Name, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListCategory" }))
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/CategoryData.js" asp-append-version="true"></script>

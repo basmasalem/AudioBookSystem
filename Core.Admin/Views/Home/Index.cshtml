@@ -1,0 +1,156 @@
+﻿@model HomeVModel
+@{
+    ViewData["Title"] = "الرئيسية";
+
+}
+
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+            <div class="risks-block high h-117">
+                <i class="icon-location-pin"></i>
+                <div class="risk-details">
+                    <h2><a class="homeLink" asp-controller="Podcast" asp-action="Index">@Model.PodcastCount</a></h2>
+                    <p><a asp-controller="Podcast" asp-action="Index">عدد التدوين الصوتي</a></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-mic"></i>
+                <div class="risk-details">
+                    <h2><a class="homeLink" asp-controller="Audio" asp-action="Index">@Model.AudioCount</a></h2>
+                    <p> <a asp-controller="Audio" asp-action="Index"> عدد ملفات الصوت</a> </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-users"></i>
+                <div class="risk-details">
+                    <h2><a class="homeLink" asp-controller="Client" asp-action="Index">@Model.ClientCount</a></h2>
+                    <p>
+                        <a  asp-controller="Client" asp-action="Index">عدد المشاركين</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-book-open"></i>
+                <div class="risk-details">
+                    <h2>
+                        <a class="homeLink" asp-controller="Category" asp-action="Index">@Model.CategoryCount</a>
+                    </h2>
+                    <p>
+                        <a asp-controller="Category" asp-action="Index">عدد فئات الكتب</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-mic"></i>
+                <div class="risk-details">
+                    <h2>
+                        <a class="homeLink" asp-controller="AudioType" asp-action="Index">@Model.AudioTypeCount</a>
+                    </h2>
+                    <p>
+                        <a asp-controller="AudioType" asp-action="Index">أنواع ملفات الصوت</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-bookmarks"></i>
+                <div class="risk-details">
+                    <h2>
+                        <a class="homeLink" asp-controller="Tag" asp-action="Index">@Model.TagCount</a>
+                    </h2>
+                    <p>
+                        <a asp-controller="Tag" asp-action="Index">عدد الأوسمة</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+            <div class="risks-block high h-117">
+                <i class="icon-feather"></i>
+                <div class="risk-details">
+                    <h2>
+                        <a class="homeLink" asp-controller="Article" asp-action="Index">@Model.ArticleCount</a>
+                    </h2>
+                    <p>
+                        <a  asp-controller="Article" asp-action="Index">عدد المقالات</a>
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row gutters">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+            <div class="card-form h-100">
+                <div class="card-header">
+                    <div class="card-title"><h5><i class="icon-book-open"></i> فئات الكتب</h5></div>
+                </div>
+                <div class="card-body">
+                    @Html.Action("GetCategories", "Home")
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+            <div class="card-form h-100">
+                <div class="card-header">
+                    <div class="card-title"><h5><i class="icon-bookmarks"></i> الأوسمة</h5></div>
+                </div>
+                <div class="card-body">
+                    @Html.Action("GetTags", "Home")
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row gutters mt-40">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+            <div class="card-form h-100">
+                <div class="card-header">
+                    <div class="card-title"><h5><i class="icon-mic"></i> التدوين الصوتي</h5></div>
+                </div>
+                
+                <div class="card-body">
+                    @Html.Action("GetPodcasts", "Home")
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Content wrapper end -->

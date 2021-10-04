@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer _Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{ var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = _Localizer.GetString(c.Name) })
+        .ToList();
+    var returnUrl = string.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString);
+}
+<div class="dropdown">
+    <button  type="button"  class="btn btn_language dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="@_Localizer["ImgSrc"]"> @_Localizer["LangTxt"]
+        <img class="arrow-down" src="~/assets/img/icon/arrow_down.png">
+    </button>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li onclick="ChangeLanguage('ar-EG','@returnUrl')" class="dropdown-item">
+            <img src="~/assets/img/icon/arabic.png"> العربية
+        </li>
+        <li onclick="ChangeLanguage('en-US','@returnUrl')" class="dropdown-item">
+            <img src="~/assets/img/icon/english.png"> English
+        </li>
+    </ul>
+</div>

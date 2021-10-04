@@ -1,0 +1,195 @@
+﻿@model AudioViewModel
+
+@{
+    string name = _localizer.GetString("langId") == "1" ? Model.BookNameAr : Model.BookNameEn;
+    ViewData["Title"] = name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+<link href="~/assets/Views/LargeBreadCrumb.css" rel="stylesheet" />
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "Audio", name })
+
+
+
+
+<!-- Course Categories Start-->
+<div>
+    <div class="container">
+
+        <div class="news-list-item">
+            <div class="news-img">
+                <a href="#">
+                    <img class="sound_d" src="@(string.IsNullOrEmpty(Model.BookImage)?"/assets/img/record/3.png":adminUrl+"Attachments/Images/"+Model.BookImage)" alt="">
+                </a>
+            </div>
+            <div class="news-content content_h">
+                <div class="content">
+                    <h5 class="news-title"><a href="#">@name</a></h5>
+                    <div class="news-date">
+                        <img src="~/assets/img/icon/calender.png">
+                        <span class="span2">@_localizer["since"] @Model.CreationDate</span>
+                    </div>
+                    <div class="news-desc">
+                        <p>
+                            @Html.Raw(_localizer.GetString("langId") == "1" ? Model.DescriptionAr : Model.DescriptionEn)
+                        </p>
+                    </div>
+                    <div class="links_circle">
+                        <div class="c1">
+                            <a href="#" onclick="PlayAudioDetails('@Model.Key')"><img src="~/assets/img/icon/white_play.png"></a>
+                            <audio style="display:none !important" controls id="audio_@Model.Key"  src="@(string.IsNullOrEmpty(Model.AudioSrc)?"https://www.w3schools.com/html/horse.ogg":adminUrl+"Attachments/Audios/"+Model.AudioSrc)">
+                            </audio>
+                        </div>
+
+                        <div class="c2">
+                            <a href="@(adminUrl+"Attachments/Audios/"+Model.AudioSrc)" download target="_blank"><img src="~/assets/img/icon/cloud.png"></a>
+                        </div>
+                        @*<div class="c4">
+                            <a href="#"><img src="~/assets/img/icon/hyperlink.png"></a>
+                        </div>
+                        <div class="c5">
+                            <a href="#"><img src="~/assets/img/icon/v-link.png"></a>
+                        </div>*@
+                        <div class="c3">
+                            <a data-toggle="modal" data-target="#exampleModalCenterShare" onclick="ShareFuncation( '@(Context.Request.Host + Context.Request.Path)','@Model.AudioId','2')"><img src="~/assets/img/icon/share_white.png"></a>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="content2 m-content">
+                    <div class="listner">
+                        <div class="rs-list orange">
+                            <img src="~/assets/img/icon/users2.png">
+                            <h2>@_localizer["Listeners"]</h2>
+                            <h4 id="lblListenerCount">@Model.ListenerCount</h4>
+                        </div>
+                        <div class="rs-list blue">
+                            <img src="~/assets/img/icon/star.png">
+                            <h2><a data-toggle="modal"  onclick="GetClientAudioRate('@Model.Key')" href="#"  data-target="#rateModal">@_localizer["Rate"]</a></h2>
+                            <h4 id="lblRatingCount" class="color_num">@Model.RatingCount</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Course Categories End -->
+</div>
+
+<div class="consulter_next no-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12  col-sm-12 col-12">
+
+                <div class="decorations">
+                    <div class="card decoration">
+
+                        <div class="card-body p-body">
+                            <div class="consliter_item text-center">
+                                <img class="comment_img1" src="@(!string.IsNullOrEmpty(Model.PublisherImage)? Model.PublisherImage.Contains("logo")?"/assets/img/logo/logo.png":adminUrl+"Attachments/Images/"+Model.PublisherImage:"/assets/img/client/client.png")">
+                                <h2 class="commt_name">@(_localizer.GetString("langId") == "1" ? Model.PublisherNameAr : Model.PublisherNameEn)</h2>
+                                <p>@(_localizer.GetString("langId") == "1" ? Model.BioAr : Model.BioEn)</p>
+                                    <div class="span_group1">
+                                        <span class="margin_box"><img src="~/assets/img/icon/location.png"><p class="locaton">@(_localizer.GetString("langId") == "1" ? Model.CityNameAr : Model.CityNameEn)</p> </span>
+                                        <span class="margin_box"><img src="~/assets/img/icon/voice3.png"> @Model.AudioCount</span>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-lg-8 col-md-12  col-sm-12 col-12 pr-0">
+                <div class="content_div">
+
+                    <div class="box_sec1">
+                        <div class="comments" id="audiocommentdiv_@Model.AudioId">
+
+                            @Html.Action("GetAudioComments", "Audio", new { AudioId = Model.AudioId })
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog comment_evaluation" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body" id="divAudioRate">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog share-popup modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body text-right">
+                <div class="share_group text-center">
+                    <div class="row">
+                        <div class="col-12"><h3 class="share_audiofile">شارك الملف الصوتي</h3></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-twitter">  <a href="#"><img src="~/assets/img/icon/tw.png"> تويتر</a>               </div> </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-fb">  <a href="#"><img src="~/assets/img/icon/f-popup.png"> فيس بوك</a>       </div>  </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-linked">  <a href="#"><img src="~/assets/img/icon/lin.png"> لينكد ان</a>            </div>  </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-sound">  <a href="#"><img src="~/assets/img/icon/cloud-popup.png"> ساوند كلاود</a>  </div>  </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-google">  <a href="#"><img src="~/assets/img/icon/gmail.png"> جوجل</a>            </div>   </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-mail">  <a href="#"><img src="~/assets/img/icon/mail-popup.png"> البريد الالكتروني</a> </div>  </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12"> <div class="copy_link">https://repoteq.com/#gallery-1  <a href="#">نسخ الرابط</a> </div>  </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/Views/Audio.js" asp-append-version="true"></script>
+}
+<script>
+    var messageAudioDetails = {
+        evaluationMsg: "@_localizer["The evaluation has been sent successfully"]",
+    }
+</script>

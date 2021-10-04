@@ -1,0 +1,38 @@
+﻿@model IList<PodcastAudioDataVM>
+
+    <div class="row gutters customScroll8">
+        @foreach (var item in Model)
+        {
+
+            <div class="Item">
+                <div class="Cover">
+                    <a data-toggle="ajax-model" id="btnShowAudioSrc_@item.PodcastAudioId" onclick="GetPodcastAudioSrc(@item.PodcastAudioId)" data-url="@Url.Action("GetPodcastAudioSrc","Podcast",new { id=item.PodcastAudioId})" data-target="#PodcastAudioCenterModal">
+                         <img class="Img " src="@(!(string.IsNullOrEmpty(item.BookImage))?"/Attachments/Images/"+item.BookImage:"/images/audio.png")">
+                        <div class="typeicon">
+                            <span class="asAudio">
+                                <i class="icon icon-headphones"></i>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                <div class="BookTitle">
+                    <a class="BookTitleLink" href="#">
+                        @item.BookNameAr
+                    </a>
+                </div>
+            </div>
+        }
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="PodcastAudioCenterModal" tabindex="-1" role="dialog" aria-labelledby="PodcastAudioCenterModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="AudioSrcDiv">
+
+
+                </div>
+            </div>
+        </div>
+    </div>

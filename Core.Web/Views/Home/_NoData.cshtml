@@ -1,0 +1,21 @@
+﻿@model string
+
+
+
+<div class="not_found_div p-100">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center">
+                    <img src="~/assets/img/icon/not-found.svg">
+                    <div class="text-center">
+                        <h3>@_localizer["nodata"]</h3>
+                        <p>@_localizer[Model]</p>
+                        <a asp-action="Index" asp-controller="Home">@_localizer["home"]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

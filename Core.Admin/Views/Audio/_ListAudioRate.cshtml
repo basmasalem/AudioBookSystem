@@ -1,0 +1,82 @@
+﻿@model IPagedList<AudioAction>
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم</th>
+                <th>نسبة التقييم </th>
+                <th> التقييم </th>
+
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.Client.FullName
+                    </td>
+                    <td>@item.Rate</td>
+                    <td>@item.RateText</td>
+
+                    <td>
+                        <div class="td-actions">
+                            @if (item.ApproveRate != null)
+                            {
+                                @(item.ApproveRate==true?"مقبول":"مرفوض")
+                            }
+                            else
+                            {
+                                <a class="icon_check_link" href="#" title="مقبول" onclick="ChangeAudioRateApprove(@item.AudioActionId,true)">
+                                    <i class=" icon-check-circle"></i>
+                                </a>
+
+                                <a href="#" title="رفض" class="icon_circle_link" onclick="ChangeAudioRateApprove(@item.AudioActionId, false)">
+                                    <i class="icon-x-circle"></i>
+                                </a>
+                            }
+
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+@Html.PagedListPager(Model, page => Url.Action("ListAudioRate", new { page, ViewBag.audioId }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+{
+    ActiveLiElementClass = "page-item active",
+    PageClasses = new[] { "page-link" },
+    UlElementClasses = new[] { "pagination justify-content-center primary" },
+    LiElementClasses = new[] { "page-item" }
+
+},
+new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListAudioRate" }))
+
+

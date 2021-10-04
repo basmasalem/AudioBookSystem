@@ -1,0 +1,78 @@
+﻿@model AboutUs
+@{
+    ViewData["Title"] = _localizer.GetString("aboutus");
+}
+
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "aboutus" })
+
+<div class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 ">
+                <div class="about_part_img about-bg-color h-100">
+                    <img src="~/assets/img/contact/logo.png">
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 ">
+                <div class="about_description h-100">
+                    <h3>@_localizer["aboutus"]</h3>
+                    @Html.Raw(int.Parse(_localizer.GetString("langId")) == 1 ? Model.AboutUsAr:Model.AboutUsEn)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rs-why-choose">
+    <div class="container">
+        <div class="row choose-list mt-50">
+            <div class="col-md-3">
+                <div class="choose-item">
+                    <img src="~/assets/img/icon/1.png">
+                </div>
+                <div class="des">
+                    <h3>@_localizer["ourstory"]</h3>
+                    <p>
+                        @_localizer["ourstorytext"]  
+                    </p>
+                </div>
+
+
+            </div>
+            <div class="col-md-3">
+                <div class="choose-item">
+                    <img src="~/assets/img/icon/2.png">
+                </div>
+                <div class="des">
+                    <h3>@_localizer["ourmission"]</h3>
+                    <p>
+                        @_localizer["ourmissiontext"]
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="choose-item">
+                    <img src="~/assets/img/icon/3.png">
+                </div>
+                <div class="des">
+                    <h3>@_localizer["ourvision"]</h3>
+                    <p>
+                        @_localizer["ourvisiontext"]
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="choose-item">
+                    <img src="~/assets/img/icon/4.png">
+                </div>
+                <div class="des">
+                    <h3>@_localizer["whatwedo"]</h3>
+                    <p>
+                        @_localizer["whatwedotext"]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

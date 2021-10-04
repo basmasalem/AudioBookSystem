@@ -1,0 +1,135 @@
+﻿@model EditProfileModel
+@{
+    ViewData["Title"] = "EditProfile";
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+
+}
+
+
+
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "myaccount", "editprofile" })
+
+
+<div class="edit_prifile p-20">
+    <div class="container">
+
+
+        <div class="row justify-content-md-center ">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="edit-content-data shadow-page">
+                    <form action="/Account/EditProfile" id="frmEditProfile">
+
+                        <input type="password" hidden asp-for="HiddenOldPassword" value="@Model.HiddenOldPassword" />
+                        <input hidden asp-for="Image" id="clientImageval" value="@Model.Image"/>
+                        <input hidden asp-for="Email"  value="@Model.Email"/>
+                        <input hidden asp-for="Key"  value="@Model.Key"/>
+                        <div class="login">
+                            <div class="add_audio">
+
+                                <img class="text-center img-edit" id="userImage" src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/d-user.png":adminUrl+"/Attachments/Images/"+Model.Image)">
+                                <div class="edit_imgprofile">
+                                    <input type="file" hidden id="clientImage" onchange="uploadImage()" />
+                                    <div class="loader" id="loaderImg" style="display:none;">
+                                        <div class="loader-wheel"></div>
+
+                                    </div>
+                                    <a class="link-style" href="javascript:void(0)" onclick="$('#clientImage').click();"><img src="~/assets/img/icon/cam.png"></a>
+                                </div>
+
+                                <div class="login-content two ">
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12">
+                                            <div class="form-group">
+                                                <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+
+                                                <input asp-for="FirstName" class="form-control " placeholder="@_localizer["firstname"] " type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <div class="form-group">
+                                                <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                                <input asp-for="LastName" class="form-control " placeholder="@_localizer["lastname"] " type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                        <input asp-for="FullName" class="form-control pass" placeholder="@_localizer["fullnameAR"] " type="text">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="placeholder-img"><img src="~/assets/img/icon/name.png"></span>
+                                        <input asp-for="FullNameEn" class="form-control pass" placeholder="@_localizer["fulllnameEN"] " type="text">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="placeholder-img"><img src="~/assets/img/icon/mess-form.png"></span>
+                                        <input asp-for="Email" class="form-control pass" placeholder="@_localizer["email"] " type="email" disabled>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="placeholder-img"><img src="~/assets/img/icon/phone.png"></span>
+                                        <input asp-for="Phone" class="form-control pass" placeholder="@_localizer["phone"] " type="text">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="placeholder-img"><img src="~/assets/img/icon/loc2.png"></span>
+                                        <select class="form-control pass" asp-for="CityId" asp-items="ViewBag.Cities">
+                                            <option value="0">@_localizer["city"]</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="p_2">
+                                    <div class="border-edit">
+                                        <h3> @_localizer["editpassword"] </h3>
+                                        <p> @_localizer["leaveempty"] </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="placeholder-img "><img src="~/assets/img/icon/key.png"></span>
+                                        <input asp-for="OldPassword" class="form-control pass" placeholder="@_localizer["oldpassword"]" type="password">
+
+                                        <span toggle="#password-field" class=" field-icon toggle-password placeholder-img key"><img class=" pass-img field-icon toggle-password" src="~/assets/img/icon/eye_splash.png"></span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="placeholder-img "><img src="~/assets/img/icon/key.png"></span>
+                                        <input asp-for="NewPassword" class="form-control pass" placeholder="@_localizer["newpassword"] " type="password">
+                                        <span toggle="#password-field" class=" field-icon toggle-newpassword placeholder-img key"><img class=" pass-img3 field-icon toggle-newpassword" src="~/assets/img/icon/eye_splash.png"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="placeholder-img "><img src="~/assets/img/icon/key.png"></span>
+                                        <input asp-for="ConfirmNewPassword" class="form-control pass" placeholder="@_localizer["confirmnewpassword"] " type="password">
+                                        <span toggle="#password-field" class=" field-icon toggle-confirmpassword placeholder-img key"><img class=" pass-img2 field-icon toggle-confirmpassword" src="~/assets/img/icon/eye_splash.png"></span>
+
+                                    </div>
+                                    <div class="add-file">
+                                        <a href="javascript:void(0)" id="btnEditprofile" class="btn btn-add2">حفظ</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/js/Views/EditProfile.js" asp-append-version="true"></script>

@@ -1,0 +1,20 @@
+﻿@model IList<PodcastParticipantDataVM>
+    <!-- Row start -->
+    <div class="row gutters customScroll8">
+        @foreach (var item in Model)
+        {
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12">
+                <figure class="user-card">
+                    <figcaption>
+
+                        <img src="/images/user.png" alt="Wafi Admin" class="profile">
+                        <h5>@item.ClientName</h5>
+
+                    </figcaption>
+                </figure>
+            </div>
+        }
+
+
+    </div>
+    <!-- Row end -->

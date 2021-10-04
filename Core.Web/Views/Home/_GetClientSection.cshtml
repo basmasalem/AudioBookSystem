@@ -1,0 +1,15 @@
+﻿@model List<ReaderVM>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="rs-carousel owl-carousel" data-loop="true" data-items="4" data-margin="20" data-autoplay="true" data-autoplay-timeout="3000" data-smart-speed="1200" data-dots="true" data-nav="true" data-nav-speed="false" data-mobile-device="1" data-mobile-device-nav="true" data-mobile-device-dots="true" data-ipad-device="2" data-ipad-device-nav="true" data-ipad-device-dots="true" data-md-device="4" data-md-device-nav="true" data-md-device-dots="true">
+                @foreach (var item in Model)
+                {
+                   @await Html.PartialAsync("~/Views/Shared/ComponentItem/_ClientItem.cshtml",item)
+                }
+            </div>
+        </div>
+
+    </div>
+

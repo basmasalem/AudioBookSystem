@@ -1,0 +1,466 @@
+﻿@using System.Security.Claims
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer _localizer
+@{
+    Layout = null;
+    //First get user claims
+    var claims = User.Identity.IsAuthenticated ? User.Claims : null;
+
+    //Filter specific claim
+    var name = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Name, StringComparison.OrdinalIgnoreCase))?.Value;
+    var email = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Email, StringComparison.OrdinalIgnoreCase))?.Value;
+    var image = claims?.FirstOrDefault(x => x.Type.Equals("Image", StringComparison.OrdinalIgnoreCase))?.Value;
+    var ClientKey = claims?.FirstOrDefault(x => x.Type.Equals("ClientKey", StringComparison.OrdinalIgnoreCase))?.Value;
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+
+}
+
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <!-- meta tag -->
+    <meta charset="utf-8">
+    <title>@(ViewBag.Title !=null? _localizer.GetString("audioKetab") + "-"+ViewBag.Title : _localizer["audioKetab"]) </title>
+    <meta name="description" content="">
+    <!-- responsive tag -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" href="~/assets/img/logo/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/logo/logo.png">
+    <!-- bootstrap v4 css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <!-- bootstraprtl v4 css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap-rtl.min.css">
+
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css" asp-append-version="true">
+    <!-- responsive css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css" asp-append-version="true">
+    <style>
+        .input-validation-error {
+            border: 1px dashed red !important;
+        }
+
+        .error {
+            border: 1px dashed red !important;
+        }
+    </style>
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css" asp-append-version="true">
+    <!-- responsive css -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css" asp-append-version="true">
+    
+</head>
+
+<body dir="rtl" class="home">
+
+
+    <!--Full width header Start-->
+    <div class="full-width-header">
+        <!-- Toolbar Start -->
+        <div class="rs-toolbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="rs-toolbar-right">
+                            <div class="welcome-message">
+                                <img src="~/assets/img/icon/arr-left.png">
+                                <span>@_localizer["AudioWelcome"]</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-6 col-sm-12">
+                        <div class="rs-toolbar-left">
+
+                            <div class="welcome-message">
+                                <partial name="_CulturePartial" />
+                            </div>
+                            <div class="welcome-message">
+                                <img src="~/assets/img/icon/mess.png">
+                                <span class="email">
+                                    @Html.Action("GetEmail", "Home")
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Toolbar End -->
+        <!--Header Start-->
+        <header id="rs-header" class="rs-header">
+            <!-- Menu Start -->
+            <div class="menu-area menu-sticky">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <nav class="navbar navbar-expand-md navbar-light ">
+                                <a href="#" class="navbar-brand">
+                                    <img src="~/assets/img/logo/logo.png" height="28" alt="CoolBrand">
+                                </a>
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+
+                                <div class="collapse navbar-collapse" id="navbarCollapse">
+                                    <div class="navbar-nav">
+                                        <a class="nav-item nav-link " is-active-route asp-controller="Home" asp-action="Index" asp-class="active">@_localizer["Home"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Podcast" asp-action="Index" class="nav-item nav-link">@_localizer["Podcast"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Client" asp-action="Readers" class="nav-item nav-link">@_localizer["Reading advisors"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Audio" asp-action="Index" class="nav-item nav-link">@_localizer["Latest audios"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Category" asp-action="Index" class="nav-item nav-link">@_localizer["Book Categories"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Article" asp-action="Index" class="nav-item nav-link">@_localizer["Article"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Setting" asp-action="AboutUs" class="nav-item nav-link">@_localizer["AboutUs"]</a>
+                                        <a is-active-route asp-class="active" asp-controller="Setting" asp-action="ContactUs" class="nav-item nav-link">@_localizer["ContactUs"]</a>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="navbar-nav block_button ml-auto">
+                                    <a href="#" class="store-link"><img src="~/assets/img/icon/cart.png"> @_localizer["Store"]</a>
+                                    @if (claims == null)
+                                    {
+                                        <div class="dropdown my-account2">
+                                            <a href="#" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
+                                                <span class="user-name"><img src="~/assets/img/icon/user.png"> @_localizer["Profile"] <img src="~/assets/img/icon/arrow_account.png"></span>
+
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userSettings">
+                                                <div class="header-profile-actions">
+
+                                                    <div class="list-drop">
+                                                        <a data-toggle="modal" data-target=".bd-example-modal-xl"><img src="~/assets/img/icon/user.png"> @_localizer["login"]</a>
+                                                        <a data-toggle="modal" data-target=".bd-example-modal-xl2">
+                                                            <img src="~/assets/img/icon/follow_add.png">  @_localizer["newaccount"]
+
+                                                        </a>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="dropdown my-account2">
+                                            <a asp-action="ClientProfile" asp-controller="Client" asp-route-key="@ClientKey" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
+                                                <span class="user-name"><img src="~/assets/img/icon/user.png"> @_localizer["myprofile"] <img src="~/assets/img/icon/arrow_account.png"></span>
+
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userSettings">
+                                                <div class="header-profile-actions">
+                                                    <div class="box_sec1">
+                                                        <div class="img_box">
+                                                            <img src="@(string.IsNullOrEmpty(image)?"/assets/img/d-user.png":adminUrl+ "Attachments/Images/"+image)" />
+                                                        </div>
+                                                        <div class="data_box">
+                                                            <span>,,@_localizer["welcomeback"]</span>
+                                                            <h3>@name</h3>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="list-drop">
+                                                        <a asp-action="EditProfile" asp-controller="Account"><img src="~/assets/img/icon/edit-info.png">@_localizer["editprofile"]  </a>
+                                                        <a href="#">
+                                                            <img src="~/assets/img/icon/chat.png"> @_localizer["chat"]
+                                                            <span>12</span>
+                                                        </a>
+                                                        <a asp-action="AddAudio" asp-controller="Audio"><img src="~/assets/img/icon/add-audio.png">@_localizer["addaudio"]   </a>
+                                                        <a asp-action="AddPodcast" asp-controller="Podcast"><img src="~/assets/img/icon/add-audio.png">@_localizer["addpodcast"]   </a>
+                                                        <a asp-action="ClientSubscribers" asp-controller="Client"><img src="~/assets/img/icon/follow_add.png">@_localizer["subscribers"]  </a>
+                                                        <a asp-action="Favorite" asp-controller="Client"><img src="~/assets/img/icon/link.png">@_localizer["favourite"] </a>
+                                                        <a asp-action="Playlist" asp-controller="Client"><img src="~/assets/img/icon/play.png"> @_localizer["playlist"] </a>
+                                                    </div>
+                                                    <a class="logout" asp-action="Logout" asp-controller="Account">@_localizer["logout"] </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+            <!-- Menu End -->
+        </header>
+        <!--Header End-->
+
+
+    </div>
+    <!--Full width header End-->
+
+    @RenderBody()
+
+    <!-- Modal playList -->
+    <div class="modal fade" id="playListModalCenter" tabindex="-1" role="dialog" aria-labelledby="playListModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal_addtosound modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-popup">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <img class="list-img" src="~/assets/img/icon/library.png">
+                                    <h3 class="add-to-list">@_localizer["Add to playlist"]</h3>
+                                    <p class="p">@_localizer["Add the current track to the desired playlist"]</p>
+                                    <div id="divClientPlayList">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal confirmDelete-->
+    <div class="modal done fade" id="confirmDeleteModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="circle_delete">
+                        <img src="~/assets/img/icon/delete.png">
+                    </div>
+
+                    <p class="delete_playlist" id="divConfirmDelete"></p>
+                    <div class="text-center">
+                        <a class="delete_playlist_a" href="javascript:void(0)" id="btnConfirmDelete">@_localizer["Delete"]</a> <a class="cancel_playlist_a" href="#" onclick="CloseConfirmDelete()">@_localizer["Cancel"]</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal ForgetPassword-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog return_pass modal-dialog-centered" role="document">
+            <div class="modal-content">
+                @await Html.PartialAsync("~/Views/Account/_ForgetPassword.cshtml")
+
+
+            </div>
+        </div>
+    </div>
+
+    <!---------------------Modal Register----------------------->
+    <div class="modal fade bd-example-modal-xl2 " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-login">
+            @Html.Action("Register", "Account")
+
+        </div>
+    </div>
+
+
+
+    <!-- Modal successReturnPassword-->
+    <div class="modal done fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <img class="done" src="~/assets/img/icon/checked.png">
+                    <p class="done-p2">@_localizer["passwordrecoverylink"]</p>
+                    <a class="link_done" href="javascript:void(0)" target="_blank" id="testmodal"></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---------------Modal login----------------------->
+
+
+    <div class="modal fade bd-example-modal-xl " tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-login">
+            <div class="modal-content login">
+
+                <div class="add_audio">
+                    <div class="container popup">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center contact-info">
+
+
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center form_part">
+                                <div class="login-content ">
+
+                                    @await Html.PartialAsync("~/Views/Account/_Login.cshtml", new LoginVM { })
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Success Modal -->
+    <div class="modal done fade" id="successModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <img class="done" src="~/assets/img/icon/checked.png">
+                    <p class="done-p" id="divSuccess"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--Error Modal -->
+    <div class="modal done fade" id="errorModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <img class="done" src="~/assets/img/icon/cancel.png">
+                    <p class="done-p" id="divErroralert">  </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenterShare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterSharerTitle" aria-hidden="true">
+   
+    </div>
+
+    <footer id="rs-footer" class="bg4 rs-footer">
+
+
+        <!-- Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 borderline">
+                        <div class="about-widget">
+                            <img src="~/assets/img/logo/logo-footer.png" alt="Footer Logo">
+
+                            @Html.Action("GetSocialMedia", "Home")
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 borderline">
+                        <h5 class="footer-title">@_localizer["Site Sections"]</h5>
+                        <ul class="sitemap-widget">
+
+                            <li><a asp-controller="Home" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Home"]</a></li>
+                            <li><a asp-controller="Category" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Book Categories"]</a></li>
+                            <li><a asp-controller="Podcast" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Podcast"]</a></li>
+                            <li><a asp-controller="Article" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Article"]</a></li>
+                            <li><a asp-controller="User" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Reading advisors"]</a></li>
+                            <li><a asp-controller="AboutUs" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["AboutUs"]</a></li>
+                            <li><a asp-controller="Audio" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Latest audios"]</a></li>
+                            <li><a asp-controller="ContactUs" asp-action="Index"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["ContactUs"]</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <h5 class="footer-title">@_localizer["Try App"]</h5>
+                        <ul class="sitemap-widget2">
+                            <li><a data-toggle="modal" data-target=".bd-example-modal-xl2"><img src="~/assets/img/icon/footer-arrow.png"> @_localizer["Register with us"]</a></li>
+                            <li><a href="#"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Download App"]</a></li>
+                            <li><a asp-action="Privacy" asp-controller="Setting"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Terms and Conditions"]</a></li>
+                            <li><a asp-action="Privacy" asp-controller="Setting"><img src="~/assets/img/icon/footer-arrow.png">@_localizer["Privacy and Usage Policy"]</a></li>
+
+
+                        </ul>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </footer>
+    <!-- start scrollUp  -->
+
+    <div id="scrollUp">
+        <i class="fa fa-angle-up"></i>
+    </div>
+
+    <script>
+        var message = {
+            playlistaudioMsg: "@_localizer["playlistaudioMsg"]",
+            playlistMsg: "@_localizer["playlistMsg"]",
+            SuccessDeleteMsg: "@_localizer["SuccessDeleteMsg"]",
+            SuccessAddTpPlaylistMsg:"@_localizer["SuccessAddTpPlaylistMsg"]",
+            commentMsg: "@_localizer["commentMsg"]",
+            errorLogin: "@_localizer["errorLogin"]",
+            emailexist: "@_localizer["emailexist"]",
+            notactiveaccount: "@_localizer["notactiveaccount"]",
+            activationlinksend: "@_localizer["activationlinksend"]",
+            agreeterms: "@_localizer["agreeterms"]",
+            notemailverfied: "@_localizer["notemailverfied"]",
+            notactive: "@_localizer["notactive"]",
+            sendcontactus: "@_localizer["sendcontactus"]",
+            errorsendingcontact: "@_localizer["errorsendingcontact"]",
+            subscriberMsg: "@_localizer["subscriberMsg"]",
+            addsuccess: "@_localizer["addsuccess"]",
+            enteralldata: "@_localizer["enteralldata"]",
+            errorwhensave: "@_localizer["errorwhensave"]",
+            FileMsg: "@_localizer["You must upload a pdf, doc or docx file"]",
+            ImgMsg: "@_localizer["You must upload a jpg, jpeg or png Image"]",
+            ImgSizeMsg:"@_localizer["It is not possible to upload an image larger than 600 kilos"]",
+
+            successeditprofile: "@_localizer["successeditprofile"]",
+            erroreditprofile: "@_localizer["erroreditprofile"]",
+            erroroldpassword: "@_localizer["erroroldpassword"]",
+
+        }
+
+    </script>
+
+    <!-- jquery latest version -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+
+    <!-- main js -->
+    <script src="~/assets/js/main.js" asp-append-version="true"></script>
+    <partial name="_Validation" />
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js" asp-append-version="true"></script>
+    <script src="~/js/Views/Layout.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+
+</html>

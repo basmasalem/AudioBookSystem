@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewData["Title"] = "add";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active">الأنشطة</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header color">
+            <div class="card-title"><i class="icon-mic"></i> إضافة ملف صوتي </div>
+        </div>
+        <div class="card-body">
+
+            <!-- Row start -->
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+
+                            <div class="card-body">
+                                <div class="row gutters">
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+                                        <div class="card-body mb txt-center">
+
+                                            <!-- Inline Radios example -->
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked">
+                                                <label class="form-check-label" for="inlineRadio1">ملخصات الكتب</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <label class="form-check-label" for="inlineRadio2">محاضرات ودورات تدريبية</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                                <label class="form-check-label" for="inlineRadio3">مقالات النشرة الإخبارية والمحادثات</label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="sel1">اسم التصنيف</label>
+                                            <select class="form-control" id="sel1">
+                                                <option>أختر...</option>
+                                                <option>التصنيف الاول</option>
+                                                <option>التصنيف التاني</option>
+                                                <option>التصنيف التالت</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="fullName">إسم الكتاب</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="إسم الكتاب ">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="fullName">اسم المؤلف</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="اسم المؤلف ">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="fullName">رابط المقال</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="رابط المقال ">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label for="fullName">رابط الفيديو</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="رابط الفيديو ">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pt-50">
+
+                                        <label for="fullName">تعليق</label>
+                                        <div class="summernote">
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pt-50">
+
+                                        <label for="fullName">
+                                            الوصف الصوتي
+                                        </label>
+                                        <div class="summernote">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-12 col-12">
+                                        <h3 class="download_book">تحميل صورة الكتاب</h3>
+                                        <div class="input-group">
+
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                                <label class="custom-file-label" for="inputGroupFile04">أختر الملف...</label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+
+                                        <div class="card-body mb txt-center">
+
+                                            <!-- Inline Radios example -->
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="upload_file" checked="checked">
+                                                <label class="form-check-label" for="inlineRadio1">إختيار ملف صوت</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="upload_record">
+                                                <label class="form-check-label" for="inlineRadio2">تسجيل ملف صوت</label>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+                                        <h3 class="download_book">تحميل الصوت</h3>
+                                        <div class="input-group">
+
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                                <label class="custom-file-label" for="inputGroupFile04">أختر الملف...</label>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="">
+                                            <div class="card-body">
+                                                <div class="avatar xxxl">
+                                                    <img src="images/logo/logo2.png" class="circle img-avatar" alt="Wafi Admin">
+                                                    <button type="button" class="close btn-close" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="custom-btn-group pt-30">
+                                                <!-- Buttons -->
+                                                <a class="btn btn-secondary" href="#" role="button"><i class="icon-controller-play"></i> بدء التسجيل</a>
+                                                <a class="btn btn-record" href="#" role="button"><i class="icon-controller-record"></i> تسجيل...</a>
+                                                <a class="btn btn-stop" href="#" role="button" disabled><i class="icon-controller-stop"></i> إيقاف</a>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-12">
+                                                    <div align="center">
+                                                        <div style="position: relative">
+                                                            <audio controls class="mt40">
+                                                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+
+                                                            </audio>
+                                                            <button type="button" class="close btn-trash" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                  
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+
+
+                            <!-- Row end -->
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->

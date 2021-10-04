@@ -1,0 +1,86 @@
+﻿@model string
+
+<div id="formats"></div>
+<p><strong></strong></p>
+
+<div class="card">
+
+    @Html.Hidden("", null, new { @id = "hdfRecordAttachments" })
+    <div class="card-body">
+        <div class="custom-btn-group pt-30" id="controls">
+            <!-- Buttons -->
+            <button id="recordButton" class="btn btn-secondary" href="#" role="button"><i class="icon-controller-play"></i> بدء التسجيل</button>
+            <button id="pauseButton" class="btn btn-record" href="#" role="button"><i class="icon-controller-record"></i> تسجيل...</button>
+            <button id="stopButton" class="btn btn-stop" href="#" role="button" disabled><i class="icon-controller-stop"></i> إيقاف</button>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div align="center">
+                    <div style="position: relative">
+                        <ol id="recordingsList"></ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="~/js/Record/app.js" asp-append-version="true"></script>
+
+
+<script>
+
+     
+    $(function () {
+        $('#hdfRecordAttachments').val('@Model');
+
+        if ('@Model' != "0") {
+            var tr = `<li id="liRecord">
+                            <audio controls class="mt40">
+                                <source src="/Attachments/Audios/@Model" type="audio/mpeg">
+                            </audio>
+                            <button type="button" class="close btn-trash" aria-label="Close" onclick="removeRecord('@Model')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>`;
+            $('#recordingsList').html("").append(tr);
+        }
+    });
+
+
+    function removeRecord(id) {
+  
+        var liRecord = document.getElementById('liRecord');
+        if (liRecord != null)
+            liRecord.remove();
+
+        if ($('#hdfRecordAttachments').val() != "0") {
+            $('#hdfRecordAttachments').val("0");
+        }
+            $.post("@Url.Action( "RemoveUpload", "Base")", { "id": id, "type": 3 }, function (res) {
+                if (res == "-1") {
+                    console.log("حصل خطأ");
+                }
+                else if (res == "-2")
+                    console.log("ملف الصوت مش موجوده");
+                else if (res == "1") {
+                    console.log("تم حذف ملف الصوت");     
+                    repeatRecording();
+                    //    $("#uploadAudio").val("");
+                 
+
+                }
+
+            });
+        
+    }
+</script>

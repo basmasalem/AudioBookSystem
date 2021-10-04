@@ -1,0 +1,163 @@
+﻿@model PodcastViewModel
+@{
+    ViewData["Title"] = ViewBag.langId == 1 ? Model.NameAr : Model.NameEn;
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+    //var des = ViewBag.langId == 1 ? Model.DescAr.Replace("&nbsp;", " ") : Model.DescEn.Replace("&nbsp;", " ");
+}
+
+
+<link href="~/assets/Views/LargeBreadCrumb.css" rel="stylesheet" />
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "Podcast", ViewBag.langId == 1 ? Model.NameAr : Model.NameEn })
+
+
+
+<!-- Course Categories Start-->
+<div>
+    <div class="container">
+
+        <div class="news-list-item">
+            <div class="news-img">
+                <a href="#">
+                    <img src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+Model.Image)" alt="">
+                </a>
+            </div>
+            <div class="news-content">
+                <div class="content">
+                    <h5 class="news-title"><a href="#">@(ViewBag.langId==1? Model.NameAr:Model.NameEn)</a></h5>
+                    <div class="news-date">
+                        <img src="/assets/img/icon/calender.png">
+                        <span>@_localizer["startfrom"] </span> <span>@Model.StartDate.Value.ToString("yyyy-MM-dd")</span>
+                    </div>
+                    <div class="news-desc">
+                        @*@Html.Raw((des.ToString().Length > 155 ? des.ToString().Substring(0, 155) : des.ToString()))*@
+                        @(ViewBag.langId == 1 ? Model.ShortDescAr.Substring(0, 155) : Model.ShortDescEn.Substring(0, 155) )
+
+                    </div>
+                    <div class="links_circle">
+                        <div class="c1">
+                            <a download style="padding: 13px;" href="@string.Concat(adminUrl,"/Attachments/Files/",Model.Attachment)"><img src="~/assets/img/icon/file.png"></a>
+                        </div>
+                        <div class="c4">
+                            <a href="@Model.Url" target="_blank"><img src="~/assets/img/icon/hyperlink.png"></a>
+                        </div>
+                        @if (User.Identity.IsAuthenticated && Model.Type == PodcastType.Public)
+                        {
+                            var claims = User.Identity.IsAuthenticated ? User.Claims : null;
+                            var ClientId = int.Parse(claims?.FirstOrDefault(x => x.Type.Equals("ClientId", StringComparison.OrdinalIgnoreCase))?.Value);
+
+                            <div class="c5" id="divBtnbtnSubscribePodcast">
+                                @if (Model.ParticipantIds.Contains(ClientId) && Model.CreatedBy != ClientId)
+                                {
+                                    <div class="user_add">
+                                        <a id="btnSubscribePodcast" onclick="SubscribePodcast('@Model.Key',false)"><img src="~/assets/img/icon/u.png"></a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="user_add2">
+                                        <a id="btnSubscribePodcast" onclick="SubscribePodcast('@Model.Key',true)"><img src="~/assets/img/icon/user-add2.svg"></a>
+                                    </div>
+                                }
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="content2">
+                    <div class="listner">
+                        <div class="rs-list orange">
+                            <img src="/assets/img/icon/users2.png">
+                            <h2>@_localizer["subscribers"]</h2>
+                            <h4 id="lblPodcastSubscribers">@Model.ParticipantCount</h4>
+                        </div>
+                        <div class="rs-list blue">
+                            <img src="/assets/img/icon/voic2.png">
+                            <h2>@_localizer["audios"]</h2>
+                            <h4 class="color_num">@Model.AudioCount</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Course Categories End -->
+</div>
+
+<div class="broadcas-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="nav-tabs-container">
+                    <div class="row justify-content-md-center bg-broadcast">
+                        <div class="col-6">
+                            <ul class="nav nav-tabs  nav-justified" id="myTab5" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active defination" id="home-tab5" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-selected="true"><img id="pic1" src="/assets/img/icon/white_voice.png"> @_localizer["podcastaudios"]  </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link defination" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile5" aria-selected="false"><img id="pic2" src="/assets/img/icon/attention.png"> @_localizer["Introductionpodcast"]  </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="myTabContent5">
+                        <div class="tab-pane fade show active" id="home5" role="tabpanel" aria-labelledby="home-tab5">
+                            <!-- Course Categories Start-->
+                            <div id="rs-events-2 sec-spacer " class=" sec-spacer  pt-90 pb-100">
+                                <div class="container" id="divListPodcastAudio">
+                                    @Html.Action("PodcastAudio", "Podcast", new { id = Model.Key })
+                                    <!-- Course Categories End -->
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
+                            <div class="defination_sec">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="se1">
+                                                @Html.Raw(ViewBag.langId == 1 ? Model.DescAr : Model.DescEn)
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/Views/Podcast.js" asp-append-version="true"></script>
+}
+<script>
+    var podcastDetails = {
+        addSubscribeMsg: "@_localizer["The podcast has been successfully subscribed to"]",
+        cancelSubscribeMsg:"@_localizer["The podcast has been successfully unsubscribed"]"
+
+    }
+</script>
+
+

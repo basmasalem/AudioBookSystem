@@ -1,0 +1,81 @@
+﻿@model AudioTypeVModel
+@{
+    int indexer = (int)ViewBag.index;
+
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم بالعربي</th>
+                <th>الاسم بالانجليزي </th>
+                <th> الصورة</th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AudioTypes)
+            {
+                <tr>
+
+                    <td> @indexer</td>
+                    <td> @item.NameAr</td>
+                    <td>@item.NameEn</td>
+                    <td><img src="@(!(string.IsNullOrEmpty(item.Image))?"/Attachments/Images/"+item.Image:"/images/audio/1.jpg")" class="circle image_table img-avatar"></td>
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("AddEdit","AudioType",new { Id=item.AudioTypeId})">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a class="btn trash-btn" href="#" id="btnAudioTypeDelete_@item.AudioTypeId" onclick="ConfirmDeleteAudioType(@item.AudioTypeId)" data-url="@Url.Action("DeleteAudioType")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.AudioTypes, page => Url.Action("ListAudioType", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListAudioType" }))
+}
+else
+{
+    @Html.PagedListPager(Model.AudioTypes, page => Url.Action("SearchAudioType", new { Model.SearchAudioTypeVModel.Name, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListAudioType" }))
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/AudioTypeData.js" asp-append-version="true"></script>

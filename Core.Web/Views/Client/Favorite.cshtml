@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = _localizer.GetString("Favorite");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] {"myaccount", "Favorite" })
+
+<!-- Course Categories Start-->
+<div id="rs-events-2" class="sec-spacer2 p-100">
+    <div class="container" id="divFavoriteList">
+        @Html.Action("FavoriteList", "Client")
+    </div>
+</div>
+<!-- Course Categories End -->

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = _localizer.GetString("Article");
+}
+
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "Article" })
+<!-- Events Start -->
+<div id="rs-events" class="rs-events2 sec-spacer">
+    <div class="container" id="divListArticle">
+        @Html.Action("ListArticle", "Article")
+    </div>
+</div>
+
+<!-- Events End -->

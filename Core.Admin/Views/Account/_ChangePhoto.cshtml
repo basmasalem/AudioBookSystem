@@ -1,0 +1,20 @@
+﻿@model ChangeImageView
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmChangePhoto", @action = "ChangePhoto" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+
+    <div class="form-group col-md-12">
+        <label>الصورة</label>
+        @Html.Editor("Image", "Image", new { htmlAttributes = new { @id = "Image" } })
+    </div>
+
+    <div align="center" class="card-footer" style="padding: 10px;">
+
+        <a href="#" class="btn btn-save" onclick="SaveChangePhoto()"><i class="fa fa-save"></i> حفظ </a>
+
+    </div>
+
+}

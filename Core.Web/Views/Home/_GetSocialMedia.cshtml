@@ -1,0 +1,11 @@
+﻿@model Setting
+<div class="widget-p"> @(_localizer.GetString("langId")=="1"?Html.Raw(Model?.DescAr): Html.Raw(Model?.DescEn))</div>
+<div class="footer-share">
+    <ul>
+        <li><a href="@(Model?.GooglePlusUrl!=null?Model.GooglePlusUrl:string.Empty)" @(Model?.GooglePlusUrl != null ? "target='_blank'" : string.Empty)><img src="~/assets/img/icon/g.png"></a></li>
+        <li><a href="@(Model?.InstgramUrl!=null?Model.InstgramUrl:string.Empty)" @(Model?.InstgramUrl != null ? "target='_blank'" : string.Empty)><img src="~/assets/img/icon/i.png"></a></li>
+        <li><a class="facebook" href="@(Model?.FacebookUrl!=null?Model.FacebookUrl:string.Empty)" @(Model?.FacebookUrl != null ? "target='_blank'" : string.Empty)><img src="~/assets/img/icon/f.png"></a></li>
+        <li><a href="@(Model?.TwitterUrl!=null?Model.TwitterUrl:string.Empty)" @(Model?.TwitterUrl != null ? "target='_blank'" : string.Empty)><img src="~/assets/img/icon/t.png"></a></li>
+
+    </ul>
+</div>

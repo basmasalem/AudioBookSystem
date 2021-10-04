@@ -1,0 +1,50 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = _localizer.GetString("contactus");
+}
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "contactus" })
+
+
+<div class="add_audio">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center contact-info">
+                <div class="item">
+                    <img src="~/assets/img/icon/item-mess1.png">
+                    <h3> @_localizer["email"]</h3>
+                    <a class="email" href="mailto:@Model.Email"   target="_blank">@Model.Email</a>
+                </div>
+                <hr>
+                <div class="item">
+                    <img src="~/assets/img/icon/item-location.png">
+                    <h3> @_localizer["address"]</h3>
+                    <a class="location" href="javascript:void(0)">@(ViewBag.langId==1?Model.AddressAr:Model.AddressEn) </a>
+                </div>
+                <hr>
+                <div class="item">
+                    <img src="~/assets/img/icon/item-phone.png">
+                    <h3> @_localizer["phone"]</h3>
+                    <a class="phone" href="tel:@Model.Phone">@Model.Phone</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center form_part">
+                @await Html.PartialAsync("_AddContactUs",new ContactUs { })
+            
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/js/Views/ContactUs.js" asp-append-version="true"></script>
+
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model List<ClientPlayListViewModel>
+@{
+    int langId = int.Parse(_localizer.GetString("langId"));
+}
+<input type="hidden" id="PlaylistAudioId" value="@ViewBag.AudioId" />
+@foreach (var item in Model)
+{
+    @*<div class="@(item.HasAudio?"list style2":"list")">
+        <div class="row" @(Model.Where(x => x.HasAudio == true).Count() == 0 ? "onclick='AddAudioPlaylist(" + item.ClientPlaylistId + ")'" : string.Empty)>*@
+    <div class="list">
+        <div class="row" onclick="AddAudioPlaylist(@item.ClientPlaylistId)" >
+
+            <div class="col-10">
+                <h4>@(langId==1?item.NameAr:item.NameEn)</h4>
+                <p>@(langId==1?item.DescAr:item.DescEn)</p>
+            </div>
+            <div class="col-2">
+                <span>@item.AudiosCount</span>
+            </div>
+        </div>
+    </div>
+}
+@*@if (Model.Where(x => x.HasAudio == true).Count() == 0)
+    {*@
+<div class="add">
+    <div class="row">
+        <div class="col-lg-8 col-md-6 col-sm-12">
+            <a class="add-playlist" onclick="OpenAddPlaylist()"><img src="assets/img/icon/add-circle.png"> @_localizer["New playlist"]</a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <a id="btnAddPlayList" onclick="AddClientPlayList()" class="add-list add-popup" href="#"><img src="assets/img/icon/save-popup.png"> @_localizer["Add"]</a>
+        </div>
+    </div>
+    <div class=" row form-popup" id="divPalyList">
+        <form class="row" id="frmAddPlaylist">
+            <div class="col-12">
+                <div class="form-group">
+
+                    <input id="name" name="NameAr" onblur="RemoveLabelError()" class="form-control" type="text" placeholder="@_localizer["NameAr"]" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+
+                    <input id="name" name="NameEn" onblur="RemoveLabelError()" class="form-control" type="text" placeholder="@_localizer["NameEn"]" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+
+                    <textarea name="DescAr" class="form-control height-addsound" id="exampleFormControlTextarea1" rows="3" placeholder="@_localizer["DescAr"]"></textarea>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+
+                    <textarea name="DescEn" class="form-control height-addsound" id="exampleFormControlTextarea1" rows="3" placeholder="@_localizer["DescEn"]"></textarea>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@*}*@

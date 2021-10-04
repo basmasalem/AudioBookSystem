@@ -1,0 +1,79 @@
+﻿@model IPagedList<PrintBook>
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم </th>
+                <th>البريد الالكتروني </th>
+                <th>رقم الجوال </th>
+                <th>العنوان </th>
+                <th>تحميل</th>
+                <th>تفعيل/تعطيل</th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.ClientName
+                    </td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Address</td>
+                    <td><a download href="~/Attachments/Files/@item.Attachment"><img class="download_pdf" src="@(item.Attachment.Contains("pdf")?"/images/download.png":"/images/word.png")"></a></td>
+                    <td class="text-center">
+
+                        <a href="#" title="@(item.IsActive?"تعطيل":"تفعيل")" class="@(item.IsActive?"icon_circle_link":"icon_check_link")" id="btnPrintBookStatus_@item.PrintBookId" onclick="ConfirmChangeStatusPrintBook(@item.PrintBookId)" data-url="@Url.Action("ChangeStatus")">
+                            <i class="@(item.IsActive?"icon-x-circle":"icon-check-circle")"></i>
+                        </a>
+
+                    </td>
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn trash-btn" href="#" id="btnPrintBookDelete_@item.PrintBookId" onclick="ConfirmDeletePrintBook(@item.PrintBookId)" data-url="@Url.Action("DeletePrintBook")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+@Html.PagedListPager(Model, page => Url.Action("ListPrintBook", new { page }),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+{
+    ActiveLiElementClass = "page-item active",
+    PageClasses = new[] { "page-link" },
+    UlElementClasses = new[] { "pagination justify-content-center primary" },
+    LiElementClasses = new[] { "page-item" }
+
+},
+new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListPrintBook" }))
+

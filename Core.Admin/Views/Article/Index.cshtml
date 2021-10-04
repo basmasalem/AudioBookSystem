@@ -1,0 +1,98 @@
+﻿
+@model SearchArticleVModel
+@{
+    ViewData["Title"] = "المقالات";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active">المقالات</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+
+    <!-- Row start -->
+    <div class="row gutters">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+
+                <div class="card-body">
+                    <div class="card-form">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="icon-layers2"></i> &nbsp; إدارة المقالات
+
+                                <a class="add-user" href="@Url.Action("AddEdit","Article")"><i class="icon-add"></i> إضافة مقال</a>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-t-20">
+                                    <form asp-action="SearchArticle" asp-controller="Article" method="post" id="frmSearchArticle" enctype="multipart/form-data">
+                                        <div class="row gutters">
+
+                                            <div class="col-xl-4 col-lg col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="Name">الاسم</label>
+                                                    <input type="text" class="form-control" asp-for="Name" placeholder=" ">
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+
+                                                    <button type="button" id="btnSearchArticle" class="btn btn-search"><i class="icon-search"></i> بحث</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-t-20">
+
+                                    <div class="card-form">
+
+                                        <div class="card-body">
+                                            <div id="divListArticle" data-request-url="@Url.Action("ListArticle","Article")">
+                                                @Html.Action("ListArticle", "Article")
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->
+
+@section Scripts{
+    
+    <script src="~/js/Views/Article.js" asp-append-version="true"></script>
+ }

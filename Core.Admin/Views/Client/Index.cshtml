@@ -1,0 +1,99 @@
+﻿
+
+@model SearchClientVModel
+@{
+    ViewData["Title"] = "المستخدمين";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active">المستخدمين</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+
+    <!-- Row start -->
+    <div class="row gutters">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+
+                <div class="card-body">
+                    <div class="card-form">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="icon-layers2"></i> &nbsp; إدارة المستخدمين
+
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-t-20">
+                                    <form asp-action="SearchClient" asp-controller="Client" method="post" id="frmClientSearch" enctype="multipart/form-data">
+                                        <div class="row gutters">
+
+                                            <div class="col-xl-4 col-lg col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="Name">الاسم</label>
+                                                    <input type="text" class="form-control" asp-for="Name" placeholder=" ">
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-xl-4 col-lg col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="Name">البريد الالكترونى</label>
+                                                    <input type="text" class="form-control" asp-for="Email" placeholder=" ">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+
+                                                    <button type="button" id="btnSearch" class="btn btn-search"><i class="icon-search"></i> بحث</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  p-t-20">
+
+                                    <div class="card-form">
+
+                                        <div class="card-body">
+                                            <div id="divListClient" data-request-url="@Url.Action("ListClient","Client")">
+                                                @Html.Action("ListClient", "Client")
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->

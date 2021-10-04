@@ -1,0 +1,31 @@
+﻿@model IPagedList<AudioViewModel>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-6 col-md-12 col-12">
+            @await Html.PartialAsync("~/Views/Shared/ComponentItem/_AudioItem.cshtml", item)
+        </div>
+    }
+</div>
+
+@if (ViewBag.Pagination)
+{
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    @Html.PagedListPager(Model, page => Url.Action("GetPlaylistAudio", new { Id = ViewBag.playlistId, page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination rounded success justify-content-center" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divPlaylistAudio" }))
+                </div>
+            </div>
+        </div>
+    </div>
+}

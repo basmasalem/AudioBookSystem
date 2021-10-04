@@ -1,0 +1,132 @@
+﻿@model Tag
+@{
+    ViewData["Title"] = "الأوسمة";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item">الأوسمة</li>
+        <li class="breadcrumb-item active"> الاضافة والتعديل</li>
+
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header color">
+            <div class="card-title">
+                <i class="icon-bookmarks"></i> إضافة وسام
+                <a class="add-user" href="@Url.Action("Index","Tag")"><i class="icon-fast_forward"></i>عودة</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Row start -->
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="AddEdit" method="post" id="frmAddTag" enctype="multipart/form-data">
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.TagId)
+                                        @Html.HiddenFor(x => x.IsDeleted)
+                                        @Html.HiddenFor(x => x.IsActive)
+                                        @Html.HiddenFor(x => x.CreationDate)
+
+
+                                        <div class="row gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="NameAr">الاسم بالعربي</label>
+                                                    <input type="text" class="form-control" asp-for="NameAr" placeholder=" ">
+                                                    <span asp-validation-for="NameAr" class="text-danger"></span>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="NameEn">الاسم بالانجليزي</label>
+                                                    <input type="text" class="form-control" asp-for="NameEn" placeholder=" ">
+                                                    <span asp-validation-for="NameEn" class="text-danger"></span>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="UploadAudiosCount">عدد ملفات الصوت المرفوعة</label>
+                                                    <input type="text" onkeypress="return isNumber(event)" required class="form-control" asp-for="UploadAudiosCount" placeholder=" ">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="FollowersCount">عدد المتابعين</label>
+                                                    <input type="text" onkeypress="return isNumber(event)" required class="form-control" asp-for="FollowersCount" placeholder=" ">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="ListenersCount">عدد مرات الاستماع</label>
+                                                    <input type="text" onkeypress="return isNumber(event)" required class="form-control" asp-for="ListenersCount" placeholder=" ">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="LikesCount">عدد مرات اللايكات</label>
+                                                    <input type="text" onkeypress="return isNumber(event)" required class="form-control" asp-for="LikesCount" placeholder=" ">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label>الصورة</label>
+                                                    @Html.Editor("Image", "Image", new { htmlAttributes = new { @id = "Image" } })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+
+                                                    <button type="button" id="btnSaveTag" class="btn btn-save2 "><i class="icon-save"></i> حفظ</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content wrapper end -->
+
+
+
+@section Scripts{
+
+    <script src="~/js/Views/AddTag.js" asp-append-version="true"></script>
+}

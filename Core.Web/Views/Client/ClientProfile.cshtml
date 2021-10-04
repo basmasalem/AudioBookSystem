@@ -1,0 +1,138 @@
+﻿@model ClientViewModel
+@{
+    ViewData["Title"] = _localizer.GetString("ClientProfile");
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+
+
+<link href="~/assets/Views/LargeBreadCrumb.css" rel="stylesheet" />
+
+<div class="rs-breadcrumbs style2 bg11 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="consulter_details">
+    <div class="container">
+        <div class="div_con">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="consliter_item">
+                        <img class="client_img" src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/d-user.png":adminUrl+"Attachments/Images/"+Model.Image)">
+                        <h2> @(ViewBag.langId==1? Model.FullName:Model.FullNameEn)</h2>
+                        <p>" @(ViewBag.langId==1? Model.BioAr:Model.BioEn) "</p>
+                        <div class="span_group1">
+                            <span><img src="~/assets/img/icon/location.png"><a class="locaton2"  asp-action="AudioCity" asp-controller="Audio" asp-route-cityId="@Model.CityId">@(ViewBag.langId==1? Model.CityAr:Model.CityEn) </a>  </span>
+                            <span><img src="~/assets/img/icon/voice3.png"> @Model.AudioCount</span>
+                        </div>
+                        <div class="div_icon_group">
+                            <div class="mess"><a href="#"><img src="~/assets/img/icon/mess2.png"></a></div>
+                            <div class="video"><a href="#"><img src="~/assets/img/icon/v.png"></a></div>
+
+                            <div id="followDiv">
+                                @if (Model.IsFollowing)
+                                {
+                                    <div class="user_add"><a href="javascript:void(0)" onclick="UnFollowClient('@Model.Key')"><img id="unfollowImg" src="~/assets/img/icon/u.png"></a></div>
+                                }
+                                @if (Model.CanFollowing)
+                                {
+                                    <div class="user_add2"><a href="javascript:void(0)" onclick="FollowClient('@Model.Key')"><img id="followImg" src="~/assets/img/icon/user-add2.svg"></a></div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="consulter_next">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-12  col-sm-12 col-12">
+
+
+                <div class="decorations">
+                    <div class="card decoration">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <img src="~/assets/img/icon/decoration.png"> @_localizer["tags"]
+
+                                <span>@Model.Tags.Count()</span>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <div class="images_decoration">
+                                @if (Model.Tags.Count() != 0)
+                                {
+                                    foreach (var item in Model.Tags)
+                                    {
+                                        <div class="box">
+                                            <img src="@(string.IsNullOrEmpty(item.Image)?"/assets/img/d-user.png":adminUrl+"Attachments/Images/"+item.Image)">
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                @Html.Action("ClientDetails", "Client", new { key = Model.Key, item = "followers" })
+                @Html.Action("ClientDetails", "Client", new { key = Model.Key, item = "subscribers" })
+
+                <div class="decorations">
+                    <div class="card decoration">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <img src="~/assets/img/icon/share2.png"> @_localizer["audioshares"]
+
+                                <span>@Model.AudioCount</span>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            @Html.Action("ClientAudioShare", "Client", new { Model.Key })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-7 col-md-12  col-sm-12 col-12 pr-0" id="divAudioList">
+
+                @Html.Action("ClientAudios", "Client", new { Model.Key })
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade popup_listner" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="clientDetailsModal">
+
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/js/Views/Audio.js" asp-append-version="true"></script>
+<script src="~/js/Views/ClientSubscribers.js" asp-append-version="true"></script>

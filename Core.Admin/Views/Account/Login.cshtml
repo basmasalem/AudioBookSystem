@@ -1,0 +1,86 @@
+﻿@model LoginVM
+
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Icomoon Font Icons css -->
+    <link rel="stylesheet" href="~/fonts/style.css">
+
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap4 Dashboard Template">
+    <meta name="author" content="ParkerThemes">
+    <link rel="shortcut icon" href="~/images/logo/logo2.png" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <!-- Title -->
+    <title>تسجيل الدخول</title>
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="~/css/main.css" />
+    <style>
+        .input-validation-error {
+            border: 1px dashed red !important;
+        }
+    </style>
+
+</head>
+
+<body class="authentication">
+
+    <!-- Container start -->
+    <div class="container mt_container">
+
+        <form action="Login" id="frmLogin" enctype="multipart/form-data">
+            <div class="row justify-content-md-center">
+                <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+                    <div class="login-screen">
+                        <div class="login-box">
+                            <a href="#" class="login-logo">
+                                <img src="~/images/logo/logo2.png" alt="AudioKetab" />
+                            </a>
+                            <span id="divError" style="color:red"></span>
+                            <div class="form-group">
+                                <label asp-for="Email"> البريد الإلكتروني</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"> كلمة المرور</label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="actions">
+
+                                <button type="button" id="btnLogin" class="btn btn-submit"><i class="icon-lock"></i> تسجيل دخول</button>
+                            </div>
+                            <hr>
+                            <div class="m-0">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!-- Container end -->
+    <script src="~/js/jquery.min.js"></script>
+    <partial name="_Validation" />
+    <script src="~/js/Views/Login.js" asp-append-version="true"></script>
+</body>
+</html>

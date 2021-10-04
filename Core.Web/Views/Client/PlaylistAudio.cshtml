@@ -1,0 +1,48 @@
+﻿@model ClientPlayListViewModel
+@{
+    ViewData["Title"] = _localizer.GetString("PlaylistAudio");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int langId = int.Parse(_localizer.GetString("langId"));
+}
+
+<div class="rs-breadcrumbs style2 bg11 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+
+    </div>
+</div>
+
+<div class="consulter_details">
+    <div class="container">
+        <div class="div_con choose">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="consliter_item">
+                        <h2>@(langId==1?Model.NameAr:Model.NameEn)</h2>
+                        <p class="other-p">@(langId==1?Model.DescAr:Model.DescEn)</p>
+                        <span>@Model.AudiosCount</span>
+                        <div class="div_icon_group">
+
+                            <audio muted style="display:none !important" id="AudioPlaylist_@Model.Key"  controls autoplay></audio>
+                            <div id="btnplayClientPalyList" class="video"><a href="#"  onclick="RunningPlaylist('@Model.Key')"><img id="imgPlayList" src="~/assets/img/icon/v.png"></a></div>
+                            <div class="user_delete"><a href="#" data-toggle="modal" data-target="#confirmDeleteModalCenter" onclick="ConfirmRemovePlaylist('@Model.Key', '@(langId==1?Model.NameAr:Model.NameEn)', false)"><img src="~/assets/img/icon/delete.png"></a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- Course Categories Start-->
+<div id="rs-events-2" class=" sec-spacer2 p-130">
+    <div class="container" id="divPlaylistAudio">
+        @Html.Action("GetPlaylistAudio", "Client",new { Id=Model.Key, page=1})
+    </div>
+
+
+
+</div>
+<!-- Course Categories End -->

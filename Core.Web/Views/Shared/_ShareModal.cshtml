@@ -1,0 +1,22 @@
+﻿@model ShareModel
+<div class="modal-dialog share-popup modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+        <div class="modal-body text-right">
+            <div class="share_group text-center">
+                <div class="row">
+                    <div class="col-12"><h3 class="share_audiofile">@_localizer["ShareVoiceNote"]</h3></div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-twitter">  <a onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'https://twitter.com/intent/tweet?text=title&amp;url=@Model.Url&amp;via=creativedevs')"><img src="~/assets/img/icon/tw.png"> @_localizer["Twitter"]</a>               </div> </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-fb">  <a   onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'https://www.facebook.com/sharer/sharer.php?u=@Model.Url')" > <img src="~/assets/img/icon/f-popup.png">@_localizer["FaceBook"]</a>       </div>  </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-linked">  <a onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'http://www.linkedin.com/shareArticle?mini=true&amp;url=@Model.ClintId&amp;title=title&amp;source=Model.Url/')" ><img src="~/assets/img/icon/lin.png">  @_localizer["LinkedIn"]</a>            </div>  </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-whatsapp">  <a onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'https://api.whatsapp.com/send?phone=+021289526130&text=@Model.Url')" ><img src="~/assets/img/icon/whatsapp.png">   @_localizer["WhatsApp"]</a>  </div>  </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-google">  <a  onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'https://plus.google.com/share?url=@Model.Url')" ><img src="~/assets/img/icon/gmail.png"> @_localizer["Gmail"]</a>            </div>   </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"> <div class="share-social-mail">  <a  onclick="SaveShare('@Model.SharedType', '@Model.SharedId', 'mailto:?subject=@Model.Url.Replace(" ", "%20")')"><img src="~/assets/img/icon/mail-popup.png">  @_localizer["Email"]</a> </div>  </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12"> <div class="copy_link">@Model.Url  <a href="#"> @_localizer["CopyLink"]</a> </div>  </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

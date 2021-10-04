@@ -1,0 +1,176 @@
+﻿@model PodcastModel
+@{
+    ViewData["Title"] = _localizer.GetString("AddPodcast");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="rs-breadcrumbs bg7 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="page-title">@_localizer["AddPodcast"]</h1>
+                    <ul>
+
+
+                        <li>@_localizer["Add your podcast now on AudioKetab"]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="add_audio potcast-add">
+    <div class="container">
+        <form action="SavePodcast" method="post" id="frmPodcast" enctype="multipart/form-data">
+            <div class="row">
+                @Html.HiddenFor(x => x.IsDeleted)
+                @Html.HiddenFor(x => x.IsActive)
+                @Html.HiddenFor(x => x.CreationDate)
+                @Html.HiddenFor(x => x.PublishType)
+                @Html.HiddenFor(x => x.CreatedBy)
+                @Html.HiddenFor(x => x.Type)
+                @Html.HiddenFor(x => x.Image, new { @id = "hdfAttachments" })
+                @Html.HiddenFor(x => x.Attachment, new { @id = "hdfFileAttachments" })
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center upload-part">
+                    <div class="verticle2">
+                        <input type="file" style="display:none" id="filImage" onchange="uploadImage()">
+                        <div class="loader" id="loaderImg" style="display:none;">
+                            <div class="loader-wheel"></div>
+
+                        </div>
+                        <div class="item afte_upload">
+
+                            <div class="row">
+                                <div id="divImgUpload" class="col-lg-12 col-sm-12 " onclick="UploadPodcastImage()">
+                                    <img src="~/assets/img/icon/upload_img.png">
+                                    <span class="file-input btn  btn-file">
+                                        @_localizer["upload podcast image"]
+                                    </span>
+                                    <p>
+                                        @_localizer["Upload the podcast image and it supports the following formats"]
+                                        <br>
+                                        Jpeg,Jpg,Png
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12">
+                                    <div id="imageres">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <input type="file" style="display:none" id="uploadFile" onchange="uploadFileAttach()">
+                        <div class="loader" id="loaderFile" style="display:none;">
+                            <div class="loader-wheel"></div>
+
+                        </div>
+                        <div class="item afte_upload">
+                            <div class="row">
+                                <div id="divFileUpload" class="col-lg-12 col-sm-12 " onclick="UploadPodcastFile()">
+                                    <img src="~/assets/img/icon/upload_file.png">
+                                    <span class="file-input btn  btn-file">
+                                        @_localizer["upload podcast file"]
+                                    </span>
+                                    <p>
+                                        @_localizer["Upload the podcast file and it supports the following formats"]
+                                        <br>
+                                        pdf,doc,docx
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12">
+                                    <div id="files">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center form_part">
+                    <div class="form_add">
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img"><img src="~/assets/img/icon/write.png"></span>
+                                <input asp-for="NameAr" class="form-control" type="text" placeholder="@_localizer["The name of the podcast is in Arabic"]">
+                                <span asp-validation-for="NameAr" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img"><img src="~/assets/img/icon/write.png"></span>
+                                <input asp-for="NameEn" class="form-control" type="text" placeholder="@_localizer["The name of the podcast is in English"]">
+                                <span asp-validation-for="NameEn" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img"><img src="~/assets/img/icon/link-gray.png"></span>
+                                <input asp-for="Url" class="form-control" type="text" placeholder="@_localizer["podcast link"]">
+                                <span asp-validation-for="Url" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img"><img src="~/assets/img/icon/gray_calender.png"></span>
+                                <input placeholder="@_localizer["Podcast Date"]" asp-for="StartDate" type="date" class="form-control date pass ">
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                                <textarea class="form-control potcast" asp-for="DescAr" rows="3" placeholder="@_localizer["Description of the podcast in Arabic"]"></textarea>
+                                <span asp-validation-for="DescAr" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="item_form">
+                            <div class="form-group">
+                                <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                                <textarea class="form-control potcast" asp-for="DescEn" rows="3" placeholder="@_localizer["Description of the podcast in English"]"></textarea>
+                                <span asp-validation-for="DescEn" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                        <div class="add-file">
+                            <a class="btn btn-add" id="addPodcast" onclick="SavePodcast()">@_localizer["AddPodcast"]</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script src="~/js/Views/Attachment.js" asp-append-version="true"></script>
+    <script src="~/js/Views/Podcast.js" asp-append-version="true"></script>
+
+}
+<script>
+    var podcastMsg = {
+
+        dataWarning: "@_localizer["You must upload a picture and a file to the podcast"]",
+        podcastSaved: "@_localizer["Podcast saved successfully"]",
+        error: "@_localizer["An error occurred while saving"]",
+        dateWarning:"@_localizer["The date must be greater than today's date"]"
+    }
+</script>

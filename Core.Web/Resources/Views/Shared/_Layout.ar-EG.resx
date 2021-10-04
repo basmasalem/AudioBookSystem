@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="activationlinksend" xml:space="preserve">
+    <value>تم إرسال رابط تفعيل حسابك على أوديو كتاب إلى بريدك الإلكتروني</value>
+  </data>
+  <data name="Add the current track to the desired playlist" xml:space="preserve">
+    <value>اضف المقطع الحالي لقائمة التشغيل المطلوبة</value>
+  </data>
+  <data name="Add to playlist" xml:space="preserve">
+    <value>اضف لقائمة التشغيل</value>
+  </data>
+  <data name="addaudio" xml:space="preserve">
+    <value>إضافة ملف صوتي</value>
+  </data>
+  <data name="addpodcast" xml:space="preserve">
+    <value>إضافة بودكاست</value>
+  </data>
+  <data name="addsuccess" xml:space="preserve">
+    <value>تم الحفظ بنجاح</value>
+  </data>
+  <data name="agreeterms" xml:space="preserve">
+    <value>يجب الموافقة على الشروط والأحكام</value>
+  </data>
+  <data name="Article" xml:space="preserve">
+    <value>المدونة</value>
+  </data>
+  <data name="audioKetab" xml:space="preserve">
+    <value>أوديو كتاب</value>
+  </data>
+  <data name="AudioWelcome" xml:space="preserve">
+    <value>مرحبا بكم في منصة أوديو كتاب</value>
+  </data>
+  <data name="Book Categories" xml:space="preserve">
+    <value>فئات الكتب</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="chat" xml:space="preserve">
+    <value>المحادثة</value>
+  </data>
+  <data name="commentMsg" xml:space="preserve">
+    <value>هل تريد حذف التعليق ؟</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Download App" xml:space="preserve">
+    <value>حمل التطبيق</value>
+  </data>
+  <data name="editprofile" xml:space="preserve">
+    <value>تعديل معلوماتي</value>
+  </data>
+  <data name="emailexist" xml:space="preserve">
+    <value>هذا البريد مسجل من قبل</value>
+  </data>
+  <data name="enteralldata" xml:space="preserve">
+    <value>يجب ادخال كل البيانات</value>
+  </data>
+  <data name="erroreditprofile" xml:space="preserve">
+    <value>حدث خطأ اثناء تعديل البيانات</value>
+  </data>
+  <data name="errorLogin" xml:space="preserve">
+    <value>البريد الإلكتروني او كلمه المرور غير صحيحه</value>
+  </data>
+  <data name="erroroldpassword" xml:space="preserve">
+    <value>كلمة المرور غير صحيحة</value>
+  </data>
+  <data name="errorsendingcontact" xml:space="preserve">
+    <value>حصل خطأ اثناء الارسال ,يرجى المحاولة مرة اخرى</value>
+  </data>
+  <data name="errorwhensave" xml:space="preserve">
+    <value>حصل خطأ اثناء الحفظ</value>
+  </data>
+  <data name="favourite" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="It is not possible to upload an image larger than 600 kilos" xml:space="preserve">
+    <value>لا يمكن رفع صورة اكبر من 600 كيلو</value>
+  </data>
+  <data name="Latest audios" xml:space="preserve">
+    <value>أحدث الصوتيات</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>تسجيل دخول</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>تسجيل خروج</value>
+  </data>
+  <data name="myprofile" xml:space="preserve">
+    <value>حسابي</value>
+  </data>
+  <data name="newaccount" xml:space="preserve">
+    <value>حساب جديد</value>
+  </data>
+  <data name="notactive" xml:space="preserve">
+    <value> البريد الإلكتروني غير مفعل</value>
+  </data>
+  <data name="notactiveaccount" xml:space="preserve">
+    <value>هذا الحساب مسجل من قبل لكنه غير مفعل</value>
+  </data>
+  <data name="notemailverfied" xml:space="preserve">
+    <value>البريد الإلكتروني لم يتم التحقق منه</value>
+  </data>
+  <data name="passwordrecoverylink" xml:space="preserve">
+    <value>تم ارسال رابط استرجاع كلمة المرور الى بريدك الالكتروني</value>
+  </data>
+  <data name="playlist" xml:space="preserve">
+    <value>قوائم التشغيل</value>
+  </data>
+  <data name="playlistaudioMsg" xml:space="preserve">
+    <value>هل تريد حذف من قائمة التشغيل؟</value>
+  </data>
+  <data name="playlistMsg" xml:space="preserve">
+    <value>هل تريد حذف قائمة</value>
+  </data>
+  <data name="Podcast" xml:space="preserve">
+    <value>بودكاست</value>
+  </data>
+  <data name="Privacy and Usage Policy" xml:space="preserve">
+    <value>سياسة الخصوصية والإستخدام</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>حسابي</value>
+  </data>
+  <data name="Reading advisors" xml:space="preserve">
+    <value>مستشارين القراءة</value>
+  </data>
+  <data name="Register with us" xml:space="preserve">
+    <value>سجل معنا</value>
+  </data>
+  <data name="sendcontactus" xml:space="preserve">
+    <value>تم ارسال رسالتك بنجاح</value>
+  </data>
+  <data name="Site Sections" xml:space="preserve">
+    <value>أقسام الموقع</value>
+  </data>
+  <data name="Store" xml:space="preserve">
+    <value>المتجر</value>
+  </data>
+  <data name="subscriberMsg" xml:space="preserve">
+    <value>هل تريد الحذف؟ </value>
+  </data>
+  <data name="subscribers" xml:space="preserve">
+    <value>قائمة المتابعة</value>
+  </data>
+  <data name="SuccessAddTpPlaylistMsg" xml:space="preserve">
+    <value>تم الاضافة الي قائمة التشغيل بنجاح</value>
+  </data>
+  <data name="SuccessDeleteMsg" xml:space="preserve">
+    <value>تم الحذف بنجاح</value>
+  </data>
+  <data name="successeditprofile" xml:space="preserve">
+    <value>تم تعديل بياناتك بنجاح</value>
+  </data>
+  <data name="Terms and Conditions" xml:space="preserve">
+    <value>الشروط والأحكام</value>
+  </data>
+  <data name="Try App" xml:space="preserve">
+    <value>جرب التطبيق</value>
+  </data>
+  <data name="welcomeback" xml:space="preserve">
+    <value>مرحبا من جديد</value>
+  </data>
+  <data name="You must upload a jpg, jpeg or png Image" xml:space="preserve">
+    <value>يجب رفع صورة من نوع jpgاو jpegاو png</value>
+  </data>
+  <data name="You must upload a pdf, doc or docx file" xml:space="preserve">
+    <value>يجب رفع ملف من نوع pdf او doc او docx</value>
+  </data>
+</root>

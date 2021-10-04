@@ -1,0 +1,60 @@
+﻿
+@model IPagedList<CategoryViewModel>
+
+@{ 
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+
+}
+<div class="row">
+
+
+    @if (Model.Count != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="Services-wrap">
+                <div class="Services-item">
+                    <div class="Services-icon">
+                        <img src="@(string.IsNullOrEmpty(item.Image)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+item.Image)" alt="">
+                    </div>
+                    <div class="Services-desc">
+
+                        <h4 class="services-title">
+                            <a asp-action="Sound" asp-controller="Category" asp-route-id="@item.Key">@(ViewBag.langId==1? item.NameAr:item.NameEn)</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Views/Home/_NoData.cshtml", "nocategory")
+
+    }
+
+</div>
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                @if (ViewBag.Pagination)
+                {
+                    @Html.PagedListPager(Model, page => Url.Action("CategoryList", new { page }),
+                                  PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                                  {
+                                      ActiveLiElementClass = "page-item active",
+                                      PageClasses = new[] { "page-link" },
+                                      UlElementClasses = new[] { "pagination justify-content-center primary" },
+                                      LiElementClasses = new[] { "page-item" }
+
+                                  },
+                                  new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListCategory" }))
+
+                }
+                </div>
+        </div>
+    </div>
+</div>

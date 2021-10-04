@@ -1,0 +1,99 @@
+﻿@model PodcastViewModel
+@{
+    ViewData["Title"] = "تفاصيل المبادرة";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item ">التدوين الصوتي</li>
+        <li class="breadcrumb-item active">@Model.NameAr</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header color">
+            <div class="card-title">
+                <i class="icon-sun"></i> @Model.NameAr
+                <a class="add-user" href="@Url.Action("Index","Podcast")"><i class="icon-fast_forward"></i>عودة</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <!-- Card start -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title p-title txt-center">
+                                <a href="@Model.Url" target="_blank" title="رابط المبادرة">
+                                    <h3>@Model.NameAr<span class="icon-link2"></span></h3>
+                                </a>
+                                @*<p>هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز </p>
+                                <p> على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها</p>*@
+                            </div>
+                        </div>
+                        <div class="card-body txt-center">
+                            <img src="~/Attachments/Images/@Model.Image" class="img-fluid Podcast-img" alt="Responsive image">
+                        </div>
+                    </div>
+                    <!-- Card end -->
+                </div>
+
+            </div>
+            <!-- Row start -->
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="nav-tabs-container">
+
+                        <ul class="nav nav-tabs nav-justified" id="myTab5" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-selected="true"><i class="icon-home2 block"></i>البيانات الأساسية</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile5" aria-selected="false"><i class="icon-mic1 block"></i>ملفات الصوت</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5" role="tab" aria-controls="contact5" aria-selected="false"><i class="icon-users block"></i>المشاركين</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent5">
+                            <div class="tab-pane fade show active" id="home5" role="tabpanel" aria-labelledby="home-tab5">
+                                @Html.Partial("_BasicData",Model)
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
+
+                                @Html.Action("GetPodcastAudio", "Podcast", new { id=Model.PodcastId})
+                                
+
+                            </div>
+                            <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab5">
+                                @Html.Action("GetPodcastParticipant", "Podcast", new { id = Model.PodcastId })
+
+                               
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Row end -->
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->
+@section Scripts{ 
+
+    <script src="~/js/Views/PodcastDetails.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,55 @@
+﻿@model PodcastViewModel
+
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card height-div">
+                <h6><i class="icon-user1"></i> الإسم</h6>
+                <h3>@Model.NameAr</h3>
+                <h3>@Model.NameEn</h3>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card height-div">
+                <h6><i class="icon-schedule"></i> تاريخ البداية</h6>
+                <h3>@Model.StartDate.Value.ToShortDateString()</h3>
+
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card height-div">
+                <h6><i class="icon-layers"></i> النوع</h6>
+                <h3>@(Model.Type==PodcastType.Public?"عام":"خاص")</h3>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="ticket-status-card height-div">
+                <h6><i class="icon-download"></i> تحميل ملف</h6>
+                @if (!string.IsNullOrEmpty(Model.Attachment))
+                {
+                    <a download href="~/Attachments/Files/@Model.Attachment"><img class="download_pdf" src="@(Model.Attachment.Contains("pdf")?"/images/download.png":"/images/word.png")"></a>
+
+                }
+            </div>
+        </div>
+        @*<div class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-12">
+            <div class="ticket-status-card customScroll9">
+                <h6><i class="icon-light-up"></i> الحالة</h6>
+                <p class="txt-right">هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز</p>
+                <p class="txt-left">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            </div>
+        </div>*@
+
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="ticket-status-card customScroll9">
+                <h6><i class="icon-border_color"></i> التفاصيل</h6>
+                <p class="txt-right">@Html.Raw(Model.DescAr)</p>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="ticket-status-card customScroll9">
+                <h6><i class="icon-border_color"></i> التفاصيل</h6>
+                <p class="txt-left">@Html.Raw(Model.DescEn)</p>
+            </div>
+        </div>
+    </div>
+

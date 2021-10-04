@@ -1,0 +1,157 @@
+﻿
+@model string
+
+<style>
+    .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<script src="~/js/jquery.min.js"></script>
+
+
+
+@Html.Hidden("", null, new { @id = "hdfFileAttachments" })
+<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+    <div class="input-group">
+        <div class="custom-file">
+            @using (Html.BeginForm("", "", FormMethod.Post,
+   new { @id = "frmAddFileAttach", @enctype = "multipart/form-data" }))
+            {
+                <input type="file" class="custom-file-input" name="file" onchange="uploadFileAttach()" id="uploadFile" />
+                <label class="custom-file-label" for="uploadFile">أختر الملف...</label>
+
+            }
+
+        </div>
+    </div>
+</div>
+<div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
+    <div class="">
+        <div class="card-body" id="divFileAttachments">
+
+        </div>
+
+    </div>
+
+</div>
+<div class="loader" id="loader" style="display:none;"></div>
+
+
+
+
+<script>
+
+    const fileSrcId ='@Model';
+    $(function () {
+        $('#hdfFileAttachments').val('@Model');
+
+        if ('@Model' != "0") {
+            var image = '@(Model.Contains("pdf")? "/images/pdf.png" : "/images/word.png")';
+                var tr = `<div class="avatar xxxl" id="div_@Model">
+                <a href="/Attachments/Files/@Model" download target="_blank" style="color: #747474"> <img src="`+image+`" class="circle img-avatar" alt="AudioKetab"></a>
+                <button type="button" class="close btn-close" aria-label="Close" onclick="removeItemFile('@Model')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+            $('#divFileAttachments').html("").append(tr);
+        }
+    })
+
+    function uploadFileAttach() {
+        debugger;
+        var formdata = new FormData();
+        var fileInput = document.getElementById('uploadFile');
+        if (fileInput.files.length > 0) {
+            $("#loader").show();
+
+            var attachFileId = $('#hdfFileAttachments').val();
+            if (attachFileId != "0") {
+                removeItemFile(attachFileId);
+            }
+            for (i = 0; i < fileInput.files.length; i++) {
+                if (!(fileInput.files[i].name.endsWith(".pdf") || fileInput.files[i].name.endsWith(".doc") || fileInput.files[i].name.endsWith(".docx"))) {
+                    $("#loader").hide();
+                    warningAlert(" يجب رفع ملف من نوع pdf او doc او docx ");
+                    $("#uploadFile").val("");
+                    return false;
+                }
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+
+            var desc = "qqq";
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '@Url.Action("UploadFile", "Base")');
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function (ress) {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var res = JSON.parse(ress.currentTarget.responseText);
+                    debugger;
+                    var file = res.src;
+                    var image = file.includes("pdf")? "/images/pdf.png" : "/images/word.png";
+                    var tr = `<div class="avatar xxxl" id="div_` + res.src + `">
+                            <a href="` + res.path + `" download target="_blank" style="color: #747474"> <img src="` + image+`" class="circle img-avatar" alt="AudioKetab"></a>
+                            <button type="button" class="close btn-close" aria-label="Close" onclick="removeItemFile('`+ res.src +`')" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>`;
+                    $('#divFileAttachments').html("").append(tr);
+                    $('#hdfFileAttachments').val(res.src);
+                    $("#loader").hide();
+
+                }
+            }
+        } else {
+            console.log("no files");
+        }
+
+    }
+
+
+    function removeItemFile(id) {
+
+
+         var divFile = document.getElementById('div_' + id);
+        if (divFile != null)
+            divFile.remove();
+
+        if ($('#hdfFileAttachments').val() != "0") {
+            $('#hdfFileAttachments').val("0");
+        }
+
+        if ((fileSrcId != id)) {
+            $.post("@Url.Action( "RemoveUpload", "Base")", { "id": id, "type": 2 }, function (res) {
+                if (res == "-1") {
+                    console.log("حصل خطأ");
+                }
+                else if (res == "-2")
+                    console.log("الملف مش موجوده");
+                else if (res == "1") {
+                    console.log("تم حذف الملف");
+                    $("#uploadFile").val("");
+                }
+
+            });
+        }
+    }
+
+</script>
+
+

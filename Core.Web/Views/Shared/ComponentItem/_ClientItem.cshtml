@@ -1,0 +1,28 @@
+﻿@model ReaderVM
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+
+<div class="item">
+    <div class="cource-img">
+        <img src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/d-user.png":adminUrl+ "Attachments/Images/"+Model.Image)" alt="">
+    </div>
+
+    @if (ViewBag.IsDeleted != null)
+    {
+        <a class="delete_follow"  onclick="ConfirmDeleteSubscriber('@Model.Key')" href="javascript:void(0)" data-toggle="modal" data-target="#confirmDeleteModalCenter" title="@_localizer["delete"]">
+            <img src="~/assets/img/icon/cl.png">
+        </a>
+    }
+
+    <div class="content-part">
+
+        <h4 class="cource-title">
+            <a asp-action="ClientProfile" asp-controller="Client" asp-route-key="@Model.Key">@(ViewBag.langId==1? Model.FullNameAr: Model.FullNameEn)</a>
+        </h4>
+        <span class="courses-sub">@(ViewBag.langId==1? Model.BioAr : Model.BioEn)</span>
+    </div>
+</div>
+
+
+

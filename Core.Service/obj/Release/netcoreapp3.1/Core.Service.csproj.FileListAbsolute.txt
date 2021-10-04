@@ -1,0 +1,14 @@
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Service.deps.json
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Service.dll
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Service.pdb
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Data.dll
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Model.dll
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Data.pdb
+E:\WebProjects\audioketabsystem\Core.Service\bin\Release\netcoreapp3.1\Core.Model.pdb
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.csprojAssemblyReference.cache
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.AssemblyInfoInputs.cache
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.AssemblyInfo.cs
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.csproj.CoreCompileInputs.cache
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.csproj.CopyComplete
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.dll
+E:\WebProjects\audioketabsystem\Core.Service\obj\Release\netcoreapp3.1\Core.Service.pdb

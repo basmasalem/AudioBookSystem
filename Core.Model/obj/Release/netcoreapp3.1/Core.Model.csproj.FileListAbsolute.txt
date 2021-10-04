@@ -1,0 +1,9 @@
+E:\WebProjects\audioketabsystem\Core.Model\bin\Release\netcoreapp3.1\Core.Model.deps.json
+E:\WebProjects\audioketabsystem\Core.Model\bin\Release\netcoreapp3.1\Core.Model.dll
+E:\WebProjects\audioketabsystem\Core.Model\bin\Release\netcoreapp3.1\Core.Model.pdb
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.csprojAssemblyReference.cache
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.AssemblyInfoInputs.cache
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.AssemblyInfo.cs
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.csproj.CoreCompileInputs.cache
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.dll
+E:\WebProjects\audioketabsystem\Core.Model\obj\Release\netcoreapp3.1\Core.Model.pdb

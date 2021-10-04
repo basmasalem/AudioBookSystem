@@ -1,0 +1,92 @@
+﻿@model PodcastVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم بالعربي</th>
+                <th>الاسم بالانجليزي </th>
+                <th> تاريخ البداية</th>
+                <th>تفعيل/تعطيل </th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Podcasts)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.NameAr
+                    </td>
+                    <td>@item.NameEn</td>
+                    <td>@item.StartDate.Value.ToShortDateString()</td>
+                    <td class="text-center">
+
+                        <a href="#" title="@(item.IsActive?"تعطيل":"تفعيل")" class="@(item.IsActive?"icon_circle_link":"icon_check_link")" id="btnPodcastStatus_@item.PodcastId" onclick="ConfirmChangeStatusPodcast(@item.PodcastId)" data-url="@Url.Action("ChangeStatus")">
+                            <i class="@(item.IsActive?"icon-x-circle":"icon-check-circle")"></i> 
+                        </a>
+
+                    </td>
+
+                    <td >
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("AddEdit","Podcast",new { Id=item.PodcastId})" title="تعديل"><i class="icon-edit"></i></a>
+                            <a class="btn feather-btn" href="@Url.Action("Details","Podcast",new { Id=item.PodcastId})" title="التفاصيل"><i class="icon-feather"></i></a>
+                            <a class="btn trash-btn" href="#" id="btnPodcastDelete_@item.PodcastId" onclick="ConfirmDeletePodcast(@item.PodcastId)" data-url="@Url.Action("DeletePodcast")" title="حذف"><i class="icon-trash"></i></a>
+
+                        </div>
+                       
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.Podcasts, page => Url.Action("ListPodcast", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListPodcast" }))
+}
+else
+{
+    @Html.PagedListPager(Model.Podcasts, page => Url.Action("SearchPodcast", new { Model.SearchPodcastVModel.Name, Model.SearchPodcastVModel.Type, Model.SearchPodcastVModel.StartDate, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListPodcast" }))
+}
+

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = _localizer.GetString("Audio");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { ViewBag.cityName,"","" })
+
+<!-- Course Categories Start-->
+<div id="rs-events-2" class="sec-spacer2 p-100">
+    <div class="container" id="divAudioCityList">
+        @Html.Action("AudioCityList", "Audio",new { cityId=ViewBag.cityId })
+    </div>
+</div>
+<!-- Course Categories End -->

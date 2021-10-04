@@ -1,0 +1,24 @@
+﻿@model List<AudioViewModel>
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="rs-carousel owl-carousel" data-loop="true" data-items="2" data-margin="20" data-autoplay="true" data-autoplay-timeout="3000" data-smart-speed="1200" data-dots="true" data-nav="true" data-nav-speed="false" data-mobile-device="1" data-mobile-device-nav="true" data-mobile-device-dots="true" data-ipad-device="2" data-ipad-device-nav="true" data-ipad-device-dots="true" data-md-device="2" data-md-device-nav="true" data-md-device-dots="true">
+            @foreach (var item in Model)
+            {
+            <div class="item">
+                @await Html.PartialAsync("~/Views/Shared/ComponentItem/_AudioItem.cshtml", item)
+              
+            </div>
+            }
+
+
+
+
+        </div>
+    </div>
+
+</div>

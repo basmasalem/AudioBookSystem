@@ -1,0 +1,48 @@
+﻿@model string[]
+
+
+<div class="rs-breadcrumbs style2 bg7 breadcrumbs-overlay">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="page-title">@(Model.Length == 2? _localizer[Model[1]].Value: _localizer[Model[0]].Value)</h1>
+                    <ul>
+                        <li>
+                            <a class="active" asp-action="Index" asp-controller="Home">@_localizer["home"]</a>
+                        </li>
+                        @if (Model.Length == 2)
+                        {
+                            @if (Model[0].ToString() == "myaccount")
+                            {
+                                <li>
+                                    <a class="active" href="#">@_localizer[Model[0]]</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="active" asp-action="Index" asp-controller="@Model[0]">@_localizer[Model[0]]</a>
+                                </li>
+                            }
+
+                            <li>@_localizer[Model[1]] </li>
+                        }
+                        else if (Model.Length == 1)
+                        {
+                            <li>@_localizer[Model[0]] </li>
+                        }
+                        else if (Model.Length == 3)
+                        {
+                            <li>@Model[0] </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

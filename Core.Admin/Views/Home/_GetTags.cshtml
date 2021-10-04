@@ -1,0 +1,27 @@
+﻿@model IList<TagDataVM>
+
+    <div class="table-responsive">
+        <table class="table table-bordered   table-striped">
+            <thead>
+                <tr>
+                    <th>الاسم بالعربي </th>
+                    <th>الاسم بالانجليزي</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NameAr</td>
+                        <td>@item.NameEn</td>
+
+                    </tr>
+                }
+
+
+
+            </tbody>
+
+        </table>
+    </div>

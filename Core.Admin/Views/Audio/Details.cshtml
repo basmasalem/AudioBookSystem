@@ -1,0 +1,89 @@
+﻿@model AudioViewModel
+@{
+    ViewData["Title"] = "ملفات الصوت";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item ">ملفات الصوت</li>
+        <li class="breadcrumb-item active">@Model.BookNameAr</li>
+
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="nav-tabs-container">
+
+                        <ul class="nav nav-tabs nav-justified" id="myTab5" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-selected="true"><i class="icon-mic block"></i>تفاصيل ملف الصوت</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile5" aria-selected="false"><i class="icon-location-pin block"></i>التدوين الصوتي</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent5">
+                            <div class="tab-pane fade show active" id="home5" role="tabpanel" aria-labelledby="home-tab5">
+                                <div class="card">
+                                    <div class="card-header color">
+                                        <div class="card-title">
+                                            <i class="icon-check-square"></i> 	@Model.BookNameAr
+                                            <a class="add-user" href="@Url.Action("Index","Audio")"><i class="icon-fast_forward"></i>عودة</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <partial name="_BasicData" model="Model" />
+                                        
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab5">
+
+                                <div class="card">
+                                    <div class="card-header color">
+                                        <div class="card-title">
+                                            <i class="icon-location-pin"></i> 	التدوين الصوتي المشترك بها
+                                            <a class="add-user" href="@Url.Action("Index","Audio")"><i class="icon-fast_forward"></i>عودة</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @Html.Action("GetPodcastAudio", "Audio", new { id=Model.AudioId})
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Row end -->
+        </div>
+    </div>
+
+</div>
+<!-- Content wrapper end -->

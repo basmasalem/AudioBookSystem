@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ReaderVM>
+
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+
+
+<div class="modal-body ">
+    <div class="m-header">
+        <img src="~/assets/img/icon/listner.png">
+        <h4>@_localizer[ViewBag.Item]</h4>
+        <p>@(ViewBag.Item=="followers"?_localizer["Alllistenersofadvisorvoices"] : _localizer["AllspeakersIlistento"])</p>
+    </div>
+    <div class="m-body customScroll5">
+        <div class="latest-courses ">
+
+
+            @if (Model.Count() != 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="post-item">
+                        <div class="post-img">
+                            <a asp-action="ClientProfile" asp-controller="Client" asp-route-key="@item.Key">
+                                <img src="@(string.IsNullOrEmpty(item.Image)?"/assets/img/d-user.png":adminUrl+"/Attachments/Images/"+item.Image)" alt="">
+                            </a>
+                        </div>
+                        <div class="post-desc">
+                            <h4><a asp-action="ClientProfile" asp-controller="Client" asp-route-key="@item.Key">@(int.Parse(_localizer.GetString("langId"))==1? item.FullNameAr : item.FullNameEn) </a></h4>
+                            <span class="duration">
+                                @(int.Parse(_localizer.GetString("langId"))==1? item.BioAr : item.BioEn)
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+
+
+
+        </div>
+    </div>
+</div>

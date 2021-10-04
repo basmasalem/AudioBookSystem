@@ -1,0 +1,211 @@
+﻿@model Core.Model.Audio
+
+
+@{
+    ViewData["Title"] = " إضافة ملف صوتي";
+}
+
+
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active"> إضافة ملف صوتي</li>
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header color">
+            <div class="card-title">
+                <i class="icon-mic"></i> إضافة ملف صوتي
+                <a class="add-user" href="@Url.Action("Index","Audio")"><i class="icon-fast_forward"></i>عودة</a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <!-- Row start -->
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+
+                            <div class="card-body">
+                                <form action="AddEdit" method="post" id="frmAudio" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(x => x.AudioId)
+                                    @Html.HiddenFor(x => x.IsDeleted)
+                                    @Html.HiddenFor(x => x.IsActive)
+                                    @Html.HiddenFor(x => x.CreationDate)
+                                    @Html.HiddenFor(x => x.CreatedBy)
+                                    @Html.HiddenFor(x => x.PublishType)
+                                    @Html.HiddenFor(x => x.ApproveStatus)
+
+                                    <div class="row gutters">
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+                                            <div class="card-body mb txt-center">
+                                                @foreach (var item in ViewBag.AudioTypes as List<Core.Model.AudioType>)
+                                                {
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="AudioTypeId" id="inlineRadio1" value="@item.AudioTypeId" asp-for="AudioTypeId">
+                                                        <label class="form-check-label" for="inlineRadio1"> @item.NameAr</label>
+                                                    </div>
+                                                }
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="sel1"> التصنيف</label>
+                                                <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Categories" required>
+                                                    <option value="">اختر...</option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName"> إسم الكتاب بالعربى  </label>
+                                                <input type="text" class="form-control" placeholder="إسم الكتاب بالعربى" asp-for="BookNameAr" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName"> إسم الكتاب بالانجليزى  </label>
+                                                <input type="text" class="form-control" placeholder="إسم الكتاب بالانجليزى" asp-for="BookNameEn" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName"> اسم المؤلف بالعربى </label>
+                                                <input type="text" class="form-control" placeholder="اسم المؤلف بالعربى " asp-for="AuthorNameAr" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName"> اسم المؤلف بالانجليزى</label>
+                                                <input type="text" class="form-control" placeholder="اسم المؤلف بالانجليزى " asp-for="AuthorNameEn" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName">رابط المقال</label>
+                                                <input type="text" class="form-control" placeholder="رابط المقال " asp-for="ArticleUrl">
+                                                <span asp-validation-for="ArticleUrl" class="text-danger"></span>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label for="fullName">رابط الفيديو</label>
+                                                <input type="text" class="form-control" id="fullName" placeholder="رابط الفيديو " asp-for="VideoUrl">
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pt-50">
+
+                                            <label for="fullName">
+                                                الوصف بالعربى
+                                            </label>
+                                            <textarea class="summernote" asp-for="DescriptionAr"></textarea>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pt-50">
+                                            <label for="fullName">
+                                                الوصف بالانجليزى
+                                            </label>
+                                            <textarea class="summernote" asp-for="DescriptionEn"></textarea>
+
+                                        </div>
+
+                                        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-12 col-12">
+                                            <h3 class="download_book">تحميل صورة الكتاب</h3>
+
+                                            @Html.Editor("BookImage", "Image", new { htmlAttributes = new { @id = "Image" } })
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+
+
+                                            <div class="card-body  txt-center">
+                                                <input type="hidden" id="UploadTypeName" value="@Model.UploadType" />
+                                                <!-- Inline Radios example -->
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="audioButton" asp- asp-for="UploadType" value="@(Core.Model.UploadType.Upload)">
+                                                    <label class="form-check-label" for="audioButton">إختيار ملف صوت</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="record_Button" asp-for="UploadType" value="@(Core.Model.UploadType.Record)">
+                                                    <label class="form-check-label" for="record_Button">تسجيل ملف صوت</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card-body" id="recordaudioDiv">
+                                                @if (Model.AudioId == 0 || (Model.AudioId != 0 && Model.UploadType == Core.Model.UploadType.Upload))
+                                                {@await Html.PartialAsync("_Audio", Model)}
+                                            else
+                                            {
+                                                @await Html.PartialAsync("_Record", Model)
+                                            }
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="text-right">
+
+                                                <button type="button" id="btnSaveAudio" class="btn btn-save2 "><i class="icon-save"></i> حفظ</button>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <!-- Row end -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Content wrapper end -->
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/Audio.js" asp-append-version="true"></script>
+
+
+
+
+
+

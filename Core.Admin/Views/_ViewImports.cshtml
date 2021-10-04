@@ -1,0 +1,13 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*import this so we get our HTML Helper*@
+@using X.PagedList.Mvc.Core;
+
+@*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList;
+@using X.PagedList.Web.Common
+
+@using Core.Admin.Models.ViewModels
+@using Core.Model
+
+@using Core.Admin
+@addTagHelper *,Core.Admin

@@ -1,0 +1,56 @@
+﻿@model ArticleViewModel
+@{
+    ViewData["Title"] = _localizer.GetString("Article");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+    string Name = int.Parse(_localizer.GetString("langId")) == 1 ? Model.NameAr : Model.NameEn;
+    //string currentUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path;
+    //string enc = System.Net.WebUtility.UrlEncode(currentUrl);
+    //string text = System.Net.WebUtility.UrlEncode(Name);
+}
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "Article", Name })
+
+
+<!-- Course Categories Start-->
+<div class="Audio_book">
+    <div class="container">
+
+        <div class="news-list-item">
+            <div class="news-img">
+                <a href="#">
+                    <img src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+Model.Image)" alt="">
+                </a>
+            </div>
+            <div class="news-content styletwo">
+
+                <h5 class="news-title2"><a href="#">@Name</a></h5>
+                <div class="news-date">
+                    <img src="~/assets/img/icon/calender.png">
+                    <span> @Model.ArticleDate.ToShortDateString()</span>
+                </div>
+
+                <div class="news-button mt-28">
+                    <a class="file_button" data-toggle="modal" data-target="#exampleModalCenterShare" onclick="ShareFuncation( '@(Context.Request.Host + Context.Request.Path)','@Model.ArticleId','1')"><img src="~/assets/img/icon/white-share.png"> @_localizer["Share"]</a>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Course Categories End -->
+</div>
+
+<div class="paragraph_book">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @Html.Raw(int.Parse(_localizer.GetString("langId")) == 1 ? Model.DescAr : Model.DescEn)
+            </div>
+        </div>
+    </div>
+
+</div>
+

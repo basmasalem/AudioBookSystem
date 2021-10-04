@@ -1,0 +1,92 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer _localizer
+@{
+
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap4 Dashboard Template">
+    <meta name="author" content="ParkerThemes">
+    <link rel="shortcut icon" href="~/assets/img/logo/logo.png" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+
+    <!-- Title -->
+    <title>@_localizer["audioKetab"]</title>
+
+
+    <!-- *************
+        ************ Common Css Files *************
+    ************ -->
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <style>
+        .authentication {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #68b6b9;
+        }
+
+        .error-screen {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: #ffffff;
+            height: 100vh;
+        }
+
+            .error-screen h1 {
+                font-family: 'ZCOOL KuaiLe', cursive;
+                font-size: 10rem;
+                font-weight: 700;
+            }
+
+        .not_found {
+            font-size: 28px;
+            margin-bottom: 18px;
+        }
+
+        .error-screen .btn {
+            padding: .5rem 1rem;
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+        }
+
+        .home {
+            color: #ffffff;
+            background-color: #e87324;
+            border-color: #e87324;
+            font-size: 16px;
+            padding: 8px 50px !important;
+        }
+    </style>
+
+
+
+
+</head>
+<body class="authentication">
+
+    <div id="particles-js"></div>
+    <div class="countdown-bg"></div>
+
+    <div class="error-screen">
+        <h1> 404 <i class="fa fa-map-signs text-white"></i></h1>
+        <h3 class="not_found">@_localizer["Not Found"]</h3>
+        <a href="@Url.Action("Index","Home")" class="btn home"><i class="icon-home"></i> @_localizer["Home"]</a>
+    </div>
+
+
+</body>
+</html>

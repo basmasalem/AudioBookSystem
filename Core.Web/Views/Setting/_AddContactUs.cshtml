@@ -1,0 +1,43 @@
+﻿@model ContactUs
+
+<form action="/Setting/SendMessage" method="post" id="frmContactUs" enctype="multipart/form-data">
+    <div class="form_add">
+        <div class="item_form">
+            <img class="logo_contact" src="~/assets/img/contact/logo.png">
+        </div>
+        <div class="item_form">
+            <div class="form-group">
+                <span class="placeholder-img"><img src="~/assets/img/icon/icon_user.png"></span>
+                <input asp-for="Name" class="form-control" type="text" placeholder="@_localizer["name"]">
+            </div>
+        </div>
+        <div class="item_form">
+            <div class="form-group">
+                <span class="placeholder-img"><img src="~/assets/img/icon/mess-form.png"></span>
+                <input asp-for="Email" class="form-control" type="email" placeholder=" @_localizer["email"]" id="email"  >
+            </div>
+        </div>
+        <div class="item_form">
+            <div class="form-group">
+                <span class="placeholder-img"><img src="~/assets/img/icon/write.png"></span>
+                <input asp-for="Title" class="form-control" type="text" placeholder=" @_localizer["title"]">
+            </div>
+        </div>
+
+
+        <div class="item_form">
+            <div class="form-group">
+                <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                <textarea class="form-control height-text-area" asp-for="Message" id="exampleFormControlTextarea1" rows="6" placeholder="@_localizer["message"] "></textarea>
+
+            </div>
+        </div>
+
+
+        <div class="add-file">
+            <a class="btn btn-add" href="javascript:void(0)" id="btnSaveContactUs"> @_localizer["send"]</a>
+
+        </div>
+    </div>
+</form>
+

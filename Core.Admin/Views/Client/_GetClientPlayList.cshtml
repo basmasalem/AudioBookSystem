@@ -1,0 +1,56 @@
+﻿@model IList<ClientPlayListViewModel>
+@{ 
+    int i = 1;
+}
+    <!-- Row start -->
+    <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+            <div class="accordion toggle-icons lg" id="toggleIcons">
+                @foreach (var item in Model)
+                {
+                    <div class="accordion-container">
+                        <div class="accordion-header" id="toggleIcons_@i">
+                            <a href="" class="" data-toggle="collapse" data-target="#toggleIconsCollapse_@i" aria-expanded="true" aria-controls="toggleIconsCollapseOne">
+                                @item.NameAr
+                            </a>
+                        </div>
+                        <div id="toggleIconsCollapse_@i" class="@(i==1?"collapse show":"collapse")" aria-labelledby="toggleIcons_@i" data-parent="#toggleIcons">
+                            <div class="accordion-body bg-white">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="popular-posts">
+                                        @foreach (var audio in item.Audios)
+                                        {
+                                            <a href="#">
+                                                <img src="@(string.IsNullOrEmpty(audio.Image)?"/images/audio/1.jpg":"/Attachments/Images/"+audio.Image)" class="post-img" alt="Wafi Blog Post">
+
+                                                <div class="post-content">
+                                                    <h6 class="post-title">@audio.NameAr</h6>
+                                                    <audio class="audio_player" controls>
+                                                        <source src="~/Attachments/Audios/@audio.AudioSrc" type="audio/mpeg">
+                                                    </audio>
+
+
+
+                                                </div>
+                                            </a>
+                                        }
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    i++;
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Row end -->

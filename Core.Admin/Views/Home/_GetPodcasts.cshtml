@@ -1,0 +1,28 @@
+﻿@model IList<PodcastViewModel>
+
+    <div class="table-responsive">
+        <table class="table table-bordered   table-striped">
+            <thead>
+                <tr>
+                    <th>الاسم بالعربي </th>
+                    <th>الاسم بالانجليزي</th>
+                    <th>تاريخ البداية</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NameAr</td>
+                        <td>@item.NameEn</td>
+                        <td>@item.StartDate.Value.ToShortDateString()</td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>

@@ -1,0 +1,26 @@
+﻿@model ArticleViewModel
+
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+
+    <div class="event-img article_img">
+        <div class="event-img">
+            <img src="@(string.IsNullOrEmpty(Model.Image)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+Model.Image)" alt="" />
+        </div>
+        <div class="events-details border-article sec-color">
+            <h5>
+                @(int.Parse(_localizer.GetString("langId")) == 1? Model.NameAr: Model.NameEn)
+            </h5>
+            <div class="event-meta">
+                <div class="event-time">
+                    <img src="~/assets/img/icon/clock.png">
+                    <span>@Model.ArticleDate.ToString("dddd, dd MMMM yyyy")</span>
+                </div>
+
+            </div>
+            <div class="event-btn">
+                <a asp-action="Details" asp-controller="Article" asp-route-id="@Model.Key">@_localizer["See More"]</a>
+            </div>
+        </div>
+    </div>

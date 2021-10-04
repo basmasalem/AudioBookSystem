@@ -1,0 +1,136 @@
+﻿@model AudioRateViewModel
+@{ 
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+}
+<div class="Evaluation">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 no-padding">
+                <div class="evaluation text-center">
+                    <div class="box-content">
+                        <span>@Model.TotalRate</span>
+                        <p>@_localizer["Average Rating"]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="add-evaluation">
+
+                    @if (Model.ClientRate == 0)
+                    {
+                        <h3>@_localizer["Add your review"]</h3>
+
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                        <div class="form-group">
+                            <span class="placeholder-img text-area"><img src="~/assets/img/icon/text-area.png"></span>
+                            <textarea class="form-control height-addsound2" id="rateText" rows="3" placeholder="@_localizer["Write your experience"]"></textarea>
+
+                        </div>
+                        <div class="add-file">
+                            <a href="#" onclick="SaveClientAudioRate('@ViewBag.audioId')" class="btn btn-add">@_localizer["Add your review"]</a>
+                        </div>
+                    }
+                    else if(Model.ClientRate!=-1)
+                    {
+                        <div class="stars">
+                            @for (int i = 0; i < Model.ClientRate; i++)
+                            {
+                                <a href="#">
+                                    <img src="~/assets/img/icon/star-c.png">
+                                </a>
+                            }
+                            @for (int i = 0; i < 5 - Model.ClientRate; i++)
+                            {
+                                <a href="#">
+                                    <img src="~/assets/img/icon/w-star.png">
+                                </a>
+                            }
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<hr class="hr">
+<div class="comments_div">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-2 col-sm-1"></div>
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                @if (Model.ClientRates.Count > 0)
+                {
+                    <div class="m-body customScroll2">
+                        <h3 class="previous-comment">@_localizer["Previous Reviews"] <span>(@Model.RateCount)</span></h3>
+                        <div class="latest-courses ">
+                            @foreach (var item in Model.ClientRates)
+                            {
+                                <div class="post-item">
+                                    <div class="post-img">
+                                        <a href="#"><img src="@(string.IsNullOrEmpty(item.Image)?"/assets/img/consulter/listener/1.png":adminUrl+"Attachments/Images/"+item.Image)" alt="" title="News image"></a>
+                                    </div>
+                                    <div class="post-desc">
+                                        <div class="starts2">
+                                            @for (int i = 0; i < item.Rate; i++)
+                                            {
+                                                <a href="#">
+                                                    <img src="~/assets/img/icon/star-c.png">
+                                                </a>
+                                            }
+                                            @for (int i = 0; i < 5 - item.Rate; i++)
+                                            {
+                                                <a href="#">
+                                                    <img src="~/assets/img/icon/w-star.png">
+                                                </a>
+                                            }
+
+
+                                        </div>
+
+                                        <span class="des-eva">
+                                            @item.RateText
+                                        </span>
+                                        <h4 class="com_name"><a href="#">@(_localizer.GetString("langId")=="1"?item.NameAr:item.NameEn )</a></h4>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                }
+
+                else
+                {
+                    <div class="no_comment">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="no_commetsec">
+                                    <img src="~/assets/img/icon/no-comment.png">
+                                    <p>@_localizer["NoReviews"]</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

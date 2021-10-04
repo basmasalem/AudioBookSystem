@@ -1,0 +1,95 @@
+﻿@model ArticleVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="text-center">
+            <tr>
+                <th>#</th>
+                <th>الاسم بالعربي</th>
+                <th>كاتب المقال بالعربي </th>
+                <th>الصورة</th>
+                <th>تفعيل/تعطيل</th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Articles)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.NameAr
+                    </td>
+                    <td>@item.ArticleOwnerAr</td>
+                    <td><img src="@(!(string.IsNullOrEmpty(item.Image))?"/Attachments/Images/"+item.Image:"/images/audio/1.jpg")" class="circle image_table img-avatar"></td>
+                    <td class="text-center">
+
+                        <a href="#" title="@(item.IsActive?"تعطيل":"تفعيل")" class="@(item.IsActive?"icon_circle_link":"icon_check_link")" id="btnArticleStatus_@item.ArticleId" onclick="ConfirmChangeStatusArticle(@item.ArticleId)" data-url="@Url.Action("ChangeStatus")">
+                            <i class="@(item.IsActive?"icon-x-circle":"icon-check-circle")"></i>
+                        </a>
+
+                    </td>
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("AddEdit","Article",new { Id=item.ArticleId})">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a href="#" class="btn trash-btn" id="btnArticleDelete_@item.ArticleId" onclick="ConfirmDeleteArticle(@item.ArticleId)" data-url="@Url.Action("DeleteArticle")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.Articles, page => Url.Action("ListArticle", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListArticle" }))
+}
+else
+{
+    @Html.PagedListPager(Model.Articles, page => Url.Action("SearchArticle", new { Model.SearchArticleVModel.Name, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListArticle" }))
+}
+
+
+

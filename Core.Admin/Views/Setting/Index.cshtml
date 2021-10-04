@@ -1,0 +1,146 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "الإعدادات";
+}
+
+<!-- Page header start -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">الرئيسية</li>
+        <li class="breadcrumb-item active">الإعدادات</li>
+
+    </ol>
+
+
+</div>
+<!-- Page header end -->
+<!-- Content wrapper start -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header color">
+            <div class="card-title"><i class="icon-cog"></i>الإعدادات </div>
+        </div>
+        <div class="card-body">
+
+            <!-- Row start -->
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form asp-action="Index" asp-controller="Setting" method="post" id="frmSetting" enctype="multipart/form-data">
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(x => x.SettingId)
+
+
+                                        <div class="row gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="AddressAr">الوصف بالعربي</label>
+                                                    <textarea class="summernote" asp-for="DescAr" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="AddressEn">الوصف بالانجليزي</label>
+                                                    <textarea class="summernote" asp-for="DescEn" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="AddressAr">العنوان بالعربي</label>
+                                                    <input type="text" class="form-control" asp-for="AddressAr" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="AddressEn">العنوان بالانجليزي</label>
+                                                    <input type="text" class="form-control" asp-for="AddressEn" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="Phone">الجوال</label>
+                                                    <input type="text" class="form-control" asp-for="Phone" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="Email">البريد الإلكتروني</label>
+                                                    <input type="text" class="form-control" asp-for="Email" required>
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="FacebookUrl">حساب الفيس بوك</label>
+                                                    <input type="text" class="form-control" asp-for="FacebookUrl" required>
+                                                    <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="InstgramUrl">حساب الانستجرام</label>
+                                                    <input type="text" class="form-control" asp-for="InstgramUrl" required>
+                                                    <span asp-validation-for="InstgramUrl" class="text-danger"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="WhatsUp">الواتس اب</label>
+                                                    <input type="text" class="form-control" asp-for="WhatsUp" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="TwitterUrl">حساب التويتر</label>
+                                                    <input type="text" class="form-control" asp-for="TwitterUrl" required>
+                                                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="GooglePlusUrl">حساب جوجل بلس</label>
+                                                    <input type="text" class="form-control" asp-for="GooglePlusUrl" required>
+                                                    <span asp-validation-for="GooglePlusUrl" class="text-danger"></span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="text-right">
+
+                                                    <button type="button" id="btnSaveSetting" class="btn btn-save2 "><i class="icon-save"></i> حفظ</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content wrapper end -->
+
+
+
+@section Scripts{
+
+    <script src="~/js/Views/Setting.js" asp-append-version="true"></script>
+}

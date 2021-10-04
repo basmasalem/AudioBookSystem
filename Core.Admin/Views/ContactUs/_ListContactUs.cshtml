@@ -1,0 +1,70 @@
+﻿@model ContactUsVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم </th>
+                <th> البريد الالكترونى </th>
+                <th> الرسالة</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ContactUs)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>@item.Email</td>
+                    <td>@item.Message</td>
+                </tr>
+                indexer++;
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.ContactUs, page => Url.Action("ListContactUs", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListContactUs" }))
+}
+else
+{
+    @Html.PagedListPager(Model.ContactUs, page => Url.Action("SearchContactUs", new { Model.SearchContactUsVModel.Name, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListContactUs" }))
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/ContactUsData.js" asp-append-version="true"></script>

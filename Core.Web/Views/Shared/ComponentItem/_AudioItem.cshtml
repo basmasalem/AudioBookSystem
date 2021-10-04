@@ -1,0 +1,82 @@
+﻿@using System.Security.Claims
+@model AudioViewModel
+@{
+    string adminUrl = configuration.GetValue<string>("AdminUrl");
+    //First get user claims
+    var claims = User.Identity.IsAuthenticated ? User.Claims : null;
+    //Filter specific claim
+    var clientId = claims?.FirstOrDefault(x => x.Type.Equals("ClientId", StringComparison.OrdinalIgnoreCase))?.Value;
+    bool IsLike = clientId != null ? Model.ClientLikeIds.Contains(int.Parse(clientId)) : false;
+    bool IsPlaylist = clientId != null ? Model.PlaylistClientIds.Contains(int.Parse(clientId)) : false;
+
+
+}
+<div class="event-item">
+    <div class="row ">
+        <div class="col-md-4 col-sm-2 ">
+            <div class="sec-img">
+                <div class="verticle-img">
+                    <img class="img-fluid upcoming-activities " src="@(string.IsNullOrEmpty(Model.BookImage)?"/assets/img/default.png":adminUrl+"Attachments/Images/"+Model.BookImage)" alt="Book Image">
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-10">
+            <div class="Upcomming-header height">
+                <span class="Upcomming-category">
+                    <a asp-controller="Audio" asp-action="Details" asp-route-Id="@Model.Key">
+                        <h2 class="address">@(ViewBag.langId ==1?Model.BookNameAr:Model.BookNameEn)</h2>
+                    </a>
+                </span>
+                <ul class="list-icon">
+                    <li><a data-toggle="modal" data-target="#exampleModalCenterShare" onclick="ShareFuncation( '@(Context.Request.Host + "/Audio/Details/"+Model.Key)','@Model.AudioId','2')"><img src="~/assets/img/icon/share.png"></a></li>
+                    @if (claims != null)
+                    {
+                        <li>
+                            <input type="hidden" id="LikePage" value="@(ViewBag.IsLikePage==null?"0":"1")" />
+                            <a href="#"><img onclick="ClientLike(@Model.AudioId,'@IsLike')" id="imgLike_@Model.AudioId" src="@(IsLike?"/assets/img/icon/like2.png":"/assets/img/icon/link.png")"></a>
+                        </li>
+
+                        <li id="playlistAudio_@Model.AudioId">
+
+                            <input type="hidden" id="playlistKey" value="@(ViewBag.playlistId==null?"0":ViewBag.playlistId)" />
+                            @if (IsPlaylist)
+                            {
+                                <a onclick="ConfirmRemoveClientPlaylistAudio(@Model.AudioId)" data-toggle="modal" data-target="#confirmDeleteModalCenter"><img src="~/assets/img/icon/red_delete.png"></a>
+
+                            }
+                            else
+                            {
+                                <a onclick="GetClientPlaylist(@Model.AudioId)" data-toggle="modal" data-target="#playListModalCenter"><img src="~/assets/img/icon/library.png"></a>
+
+                            }
+                        </li>
+
+                    }
+
+                </ul>
+
+                <span class="author">تأليف: @(ViewBag.langId ==1?Model.AuthorNameAr : Model.AuthorNameEn) </span>
+
+                <div class="upcoming-date">
+                    <img src="@(!string.IsNullOrEmpty(Model.PublisherImage)? Model.PublisherImage.Contains("logo")?"/assets/img/logo/logo.png":adminUrl+"Attachments/Images/"+Model.PublisherImage:"/assets/img/client/client.png")">
+                    <span>
+                        @(ViewBag.langId ==1?Model.PublisherNameAr : Model.PublisherNameEn)
+                    </span>
+
+
+                </div>
+                <div class="link">
+
+                    <a href="#" class="read">@(ViewBag.langId ==1?Model.AudioTypeNameAr : Model.AudioTypeNameEn)</a>
+                    <a href="#" class="caleture">@(ViewBag.langId ==1?Model.CategoryNameAr : Model.CategoryNameEn)</a>
+                </div>
+                <audio controls id="audio_@Model.Key" onpause="PlayAudio('@Model.Key', false)" onplay="PlayAudio('@Model.Key',true)" src="@(string.IsNullOrEmpty(Model.AudioSrc)?"https://www.w3schools.com/html/horse.ogg":adminUrl+"Attachments/Audios/"+Model.AudioSrc)">
+                </audio>
+            </div>
+
+        </div>
+    </div>
+</div>

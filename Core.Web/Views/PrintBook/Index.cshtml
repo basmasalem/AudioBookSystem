@@ -1,0 +1,127 @@
+﻿@model PrintBookModel
+@{
+    ViewData["Title"] = _localizer.GetString("print your book");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="rs-breadcrumbs style3 bg12 ">
+    <div class="breadcrumbs-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="page-title">@_localizer["print your book"]</h1>
+                    <ul>
+                        <li>
+                            <a class="active" asp-controller="Home" asp-action="Index">@_localizer["Home"]</a>
+                        </li>
+
+                        <li>@_localizer["print your book"]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="print_book p pb-170">
+    <div class="container">
+        <form  method="post" id="frmPrintBook" enctype="multipart/form-data">
+            <div class="row justify-content-md-center">
+                @Html.HiddenFor(x => x.IsDeleted)
+                @Html.HiddenFor(x => x.IsActive)
+                @Html.HiddenFor(x => x.CreationDate)
+                @Html.HiddenFor(x => x.Attachment, new { @id = "hdfFileAttachments" })
+                <div class="col-xl-7 col-lg-8 col-md-8 col-sm-12">
+                    <div class="pass-content two">
+                        <img class="print_bookimg" src="~/assets/img/printbook/print_bok.png">
+                        <div class="form-group">
+                            <span class="placeholder-img "><img src="~/assets/img/icon/name.png"></span>
+                            <input asp-for="ClientName" class="form-control " placeholder="@_localizer["FullName"]" type="text">
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <span class="placeholder-img"><img src="~/assets/img/icon/phone.png"></span>
+                            <input asp-for="Phone" class="form-control pass" placeholder="@_localizer["Phone"]" type="text">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="placeholder-img"><img src="~/assets/img/icon/mess-form.png"></span>
+                            <input asp-for="Email" class="form-control pass" placeholder="@_localizer["Email"]" type="email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="placeholder-img text-area"><img src="~/assets/img/icon/loc2.png"></span>
+                            <textarea class="form-control pass_area height-addsound" asp-for="Address" rows="3" placeholder="@_localizer["Detailed address"]"></textarea>
+
+                        </div>
+                        <input type="file" style="display:none" id="uploadFile" onchange="uploadFileAttach()">
+                        <div class="loader" id="loaderFile" style="display:none;">
+                            <div class="loader-wheel"></div>
+
+                        </div>
+                        <div class="post-item " onclick="$('#uploadFile').click();">
+                            <div class="post-img">
+                                <img src="~/assets/img/icon/upload2.png">
+                            </div>
+                            <div class="post-desc">
+                                <span class="file-input btn  btn-file">
+                                    @_localizer["Upload Book"]
+                                </span>
+                                <p>
+                                    pdf,doc,docx
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group" id="files">
+
+                        </div>
+                        @*<div class="post-item">
+                            <div class="row">
+                                <div id="divFileUpload" class="col-lg-12 col-sm-12 " onclick="UploadPodcastFile()">
+                                    <div class="post-img">
+                                        <img src="~/assets/img/icon/upload2.png">
+                                    </div>
+                                    <div class="post-desc">
+                                        <span class="file-input btn  btn-file">
+                                            @_localizer["Upload Book"]
+                                        </span>
+                                        <p>
+                                            pdf,doc,docx
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div id="files">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>*@
+                        <div class="login">
+                            <a href="#" onclick="SavePrintBook()" id="btnPrintBook" class="btn btn-add">@_localizer["Send a print request"]</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/Views/Attachment.js" asp-append-version="true"></script>
+    <script src="~/js/Views/PrintBook.js" asp-append-version="true"></script>
+
+}
+<script>
+    var printBookMsg={
+        dataWarning: "@_localizer["The book must be uploaded"]",
+        bookSaved: "@_localizer["Your request to print the book has been sent successfully"]",
+        error:"@_localizer["An error occurred while saving"]"
+    }
+</script>

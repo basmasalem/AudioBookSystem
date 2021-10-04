@@ -1,0 +1,23 @@
+﻿
+
+@{
+    ViewData["Title"] = "ClientSubscribers";
+}
+
+
+@await Html.PartialAsync("~/Views/Home/_breadcrumb.cshtml", new string[] { "subscribers", "myaccount" })
+
+<!-- Course Categories Start-->
+<div id="rs-courses-style7" class="rs-courses-style7 sec-spacer">
+    <div class="container" id="divSubscribersList">
+
+        @Html.Action("ClientSubscribersList", "Client")
+
+    </div>
+</div>
+<!-- Course Categories End -->
+
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/js/Views/ClientSubscribers.js" asp-append-version="true"></script>

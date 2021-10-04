@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "Record";
+}
+
+<h1>Record</h1>
+
+@*<div id="controls">
+    <button id="recordButton">Record</button>
+    <button id="pauseButton" disabled>Pause</button>
+    <button id="stopButton" disabled>Stop</button>
+</div>*@
+<div id="formats">Format: start recording to see sample rate</div>
+<p><strong>Recordings:</strong></p>
+@*<ol id="recordingsList"></ol>*@
+<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+
+
+<div class="card ">
+
+    <div class="card-body">
+        <div class="custom-btn-group pt-30" id="controls">
+            <!-- Buttons -->
+            <button id="recordButton" class="btn btn-secondary" href="#" role="button"><i class="icon-controller-play"></i> بدء التسجيل</button>
+            <button id="pauseButton" class="btn btn-record" href="#" role="button"><i class="icon-controller-record"></i> تسجيل...</button>
+            <button id="stopButton" class="btn btn-stop" href="#" role="button" disabled><i class="icon-controller-stop"></i> إيقاف</button>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div align="center">
+                    <div style="position: relative">
+                        <ol id="recordingsList">
+                            <li>
+                                <audio controls class="mt40">
+                                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+
+                                </audio>
+                                <button type="button" class="close btn-trash" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </li>
+                        </ol>
+                   
+
+                 
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="~/js/Record/app.js"></script>

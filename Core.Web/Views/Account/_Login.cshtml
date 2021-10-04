@@ -1,0 +1,48 @@
+﻿
+@model LoginVM
+
+
+<form action="/Account/Login" id="frmLogin">
+    <div class="login-meta">
+        <h3>@_localizer["welcomeback"]</h3>
+        <p>@_localizer["logintoenjoy"]</p>
+    </div>
+
+    <div class="form-group">
+        <span class="placeholder-img"><img src="~/assets/img/icon/login-email.png"></span>
+        <input asp-for="Email" class="form-control" placeholder="@_localizer["email"] " type="email">
+    </div>
+    <div class="form-group">
+        <span class="placeholder-img"><img src="~/assets/img/icon/key.png"></span>
+        <input asp-for="Password" class="form-control pass" placeholder="@_localizer["Password"] " type="password">
+        <span toggle="#password-field" class=" field-icon toggle-password placeholder-img key"><img class=" pass-img field-icon toggle-password" src="~/assets/img/icon/eye_splash.png"></span>
+        @*<span toggle="#password-field" class=" field-icon toggle-password placeholder-img key"><img class=" pass-img field-icon toggle-password" src="assets/img/icon/eye_splash.png"></span>*@
+
+    </div>
+    <span id="divError" style="color:red"></span>
+    <label class="container-check ">
+        @_localizer["rememberme"]
+
+        <input type="checkbox" >
+        <span class="checkmark"></span>
+        <a data-dismiss="modal" data-toggle="modal" data-target="#exampleModalCenter" class="remember_me forgetPassword">@_localizer["forgetpassword"]</a>
+    </label>
+
+
+    <div class="login-btn">
+        <div class="login">
+            <a class="btn btn-add" href="javascript:void(0)" id="btnLogin">@_localizer["login"]</a>
+        </div>
+        <div class="forget">
+            <a data-target=".bd-example-modal-xl2" class="btn btn-add hideLogin"   data-toggle="modal">@_localizer["nohaveaccount"]</a>
+        </div>
+        <div class="create">
+            <a class="btn btn-add hideLogin"  data-target=".bd-example-modal-xl2" data-toggle="modal">@_localizer["register"]</a>
+        </div>
+
+
+    </div>
+
+</form>
+
+<script src="~/assets/js/jquery.min.js"></script>

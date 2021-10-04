@@ -1,0 +1,90 @@
+﻿@model ClientVModel
+@{
+    int indexer = (int)ViewBag.index;
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>الاسم </th>
+                <th>البريد الالكترونى  </th>
+                <th> الجوال  </th>
+                <th> تاريخ الاضافة  </th>
+                <th> </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Clients)
+            {
+                <tr>
+
+                    <td>
+                        @indexer
+                    </td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>@item.RegisterationDate.ToString("yyyy-MM-dd")</td>
+
+                    <td>
+                        <div class="td-actions">
+                            <a class="btn edit-btn" href="@Url.Action("Details","Client",new {Id=item.ClientId})">
+                                <i class="icon-feather"></i>
+                            </a>
+                            <a class="btn trash-btn" href="#" id="btnClientDelete_@item.ClientId" onclick="ConfirmDeleteClient(@item.ClientId)" data-url="@Url.Action("DeleteClient")">
+                                <i class="icon-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+                indexer++;
+            }
+
+
+
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+@if (ViewBag.type == 1)
+{
+    @Html.PagedListPager(Model.Clients, page => Url.Action("ListClient", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        ActiveLiElementClass = "page-item active",
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination justify-content-center primary" },
+        LiElementClasses = new[] { "page-item" }
+
+    },
+    new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "divListClient" }))
+}
+else
+{
+    @Html.PagedListPager(Model.Clients, page => Url.Action("SearchClient", new { Model.SearchClientVModel.Name, Model.SearchClientVModel.Email, page }),
+   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+   {
+       ActiveLiElementClass = "page-item active",
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination justify-content-center primary" },
+       LiElementClasses = new[] { "page-item" }
+
+   },
+   new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "divListClient" }))
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/Views/ClientData.js" asp-append-version="true"></script>
